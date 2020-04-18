@@ -21,8 +21,13 @@
         <a href="{% url 'index' %}" class="logo">
             <img src="{% static 'images/logo.png' %}" alt="ideabox">
         </a>
-        <!-- <a href="" class="login">ログイン</a> -->
+        {% if user.is_authenticated %}
         <a href="" class="upload">とうこう</a>
+        <a href="{% url 'logout' %}" class="logout">ログアウト</a>
+        {% else %}
+        <a href="{% url 'login' %}" class="login">ログイン</a>
+        <a href="{% url 'signup' %}" class="signup">とうろく</a>
+        {% endif %}
     </div>
 
     <div class="main">

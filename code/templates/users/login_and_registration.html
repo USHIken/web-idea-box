@@ -8,12 +8,22 @@
         {% csrf_token %}
         <label for="id_username" class="label-username">ユーザー名</label>
         {{form.username}}
+
+        {% if request.path == '/users/login/' %}
+
         <label for="id_password" class="label-password">パスワード</label>
         {{form.password}}
-        {% if request.path == '/users/login/' %}
         <button id="login-button" style="background-color: #d8cf81;">ログイン</button>
+
         {% else %}
+
+        <label for="id_password1" class="label-password1">パスワード</label>
+        {{form.password1}}
+        <label for="id_password2" class="label-password2">パスワード(確認)</label>
+        {{form.password2}}
+
         <button id="signup-button" style="background-color: #a0cccb;">とうろく</button>
+
         {% endif %}
     </form>
     <div class="errorlist">
