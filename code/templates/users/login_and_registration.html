@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="login_and_signup">
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_username" class="label-username">ユーザー名</label>
+        {{form.username}}
+        <label for="id_password" class="label-password">パスワード</label>
+        {{form.password}}
+        {% if request.path == '/users/login/' %}
+        <button id="login-button" style="background-color: #d8cf81;">ログイン</button>
+        {% else %}
+        <button id="signup-button" style="background-color: #a0cccb;">とうろく</button>
+        {% endif %}
+    </form>
+    <div class="errorlist">
+    {% for key,error in form.errors.items %}
+        {{error}}
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
