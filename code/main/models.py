@@ -22,17 +22,18 @@ class Content(models.Model):
     creator = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="contents")
     # タイトル
-    title = models.CharField(default="", max_length=64)
+    title = models.CharField(max_length=64)
     # 説明
-    description = models.TextField(default="")
+    description = models.TextField(blank=True, null=False)
     # コンテンツのタイプ
     content_type = models.CharField(
         choices=utils.CONTENT_TYPES, default=utils.SCRATCH, max_length=32)
     # 一覧で表示される画像
-    thumbnail = models.ImageField(upload_to=get_image_path)
+    thumbnail = models.ImageField(
+        upload_to=get_image_path, blank=True, null=True)
     # プロジェクトの各種サイトURL
-    url = models.URLField(blank=True, null=True)
-    embed_html = models.TextField(default="")
+    url = models.URLField(blank=True, null=False, default="")
+    embed_html = models.TextField(blank=True, null=False)
 
 
 @receiver(pre_save, sender=Content)
