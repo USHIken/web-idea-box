@@ -5,3 +5,4 @@ django-extensions
 ipython
 beautifulsoup4
 selenium
+requests
