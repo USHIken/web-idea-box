@@ -4,10 +4,11 @@ services:
 
   postgres:
     image: postgres
-    env_file: .postgres.env
+    env_file: .envs/.postgres.env
 
   django:
     build: .
+    env_file: .envs/.django.env
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./code:/code
