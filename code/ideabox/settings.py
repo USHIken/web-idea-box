@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'django_extensions',
 ]
 
@@ -119,6 +118,11 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Media files (uploaded by user)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
@@ -130,3 +134,9 @@ STATICFILES_DIRS = [
 
 # django-extensions
 SHELL_PLUS = "ipython"
+
+
+# django.contrib.auth
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = 'users:login'
