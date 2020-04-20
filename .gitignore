@@ -168,6 +168,6 @@ dmypy.json
 
 # End of https://www.gitignore.io/api/python,django
 
-.envs/*.env
+.env/.production/*.env
 
 .DS_Store
