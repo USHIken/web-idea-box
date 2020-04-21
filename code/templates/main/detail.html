@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="content-card">
+    <h5>{{content.title}}</h5>
+    {% if is_embed %}
+    {{content.embed_html|safe}}
+    {% endif %}
+    {% if not is_embed %}
+            <img src="{%if content.thumbnail %}{{content.thumbnail.url}}{% endif %}" alt="作品サムネイル">
+    {% endif %}
+    <p>{{content.description}}</p>
+</div>
+
+<form action="{% url 'main:delete' content.pk %}" method="post" onsubmit="return confirm_cancel('{{content.title}}を削除しますか？')">
+    {% csrf_token %}
+    <input type="submit" value="削除">
+</form>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+
+{% endblock %}

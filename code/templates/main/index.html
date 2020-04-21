@@ -9,7 +9,7 @@
     <div class="content-card">
         <a href="{% url 'main:detail' content.pk %}">
             <h5>{{content.title}}</h5>
-            <img src="{{content.thumbnail.url}}" alt="作品サムネイル">
+            <img src="{%if content.thumbnail %}{{content.thumbnail.url}}{% endif %}" alt="作品サムネイル">
             <p>{{content.description}}</p>
         </a>
     </div>
