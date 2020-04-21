@@ -38,6 +38,15 @@ class Content(models.Model):
     def __str__(self):
         return f'{self.content_type}: {self.title}'
 
+    @property
+    def is_embed_type(self):
+        """コンテンツ埋め込みタイプであるかどうか"""
+        return self.content_type in utils.EMBED_TYPES
+    
+    def is_created_by(self, user):
+        """コンテンツ投稿者であるかどうか"""
+        return self.creator == user
+
 
 @receiver(pre_save, sender=Content)
 def blog_post_model_pre_save_receiver(sender, instance, *args, **kwargs):

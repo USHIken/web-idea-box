@@ -5,11 +5,11 @@
 
 <div class="content-card">
     <h5>{{content.title}} - {{content.creator}}</h5>
-    {% if is_embed %}
+    {% if content.is_embed_type %}
     {{content.embed_html|safe}}
     {% endif %}
-    {% if not is_embed %}
-            <img src="{%if content.thumbnail %}{{content.thumbnail.url}}{% endif %}" alt="作品サムネイル">
+    {% if not content.is_embed_type and content.thumbnail %}
+    <img src="{{content.thumbnail.url}}" alt="作品サムネイル">
     {% endif %}
     <p>{{content.description}}</p>
 </div>

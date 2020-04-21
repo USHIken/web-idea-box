@@ -6,7 +6,6 @@ from django.views.generic import (
     CreateView, UpdateView,
 )
 
-from main import utils
 from main.forms import ContentCreateForm, ContentUpdateForm
 from main.models import Content
 
@@ -15,10 +14,6 @@ class ContentListView(ListView):
     template_name = "main/index.html"
     model = Content
     paginate_by = 20
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
 
 
 class ContentCreateView(LoginRequiredMixin, CreateView):
@@ -43,8 +38,7 @@ class ContentDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["is_embed"] = self.object.content_type in utils.EMBED_TYPES
-        context["is_creator"] = self.object.creator == self.request.user
+        context["is_creator"] = self.object.is_created_by(self.request.user)
         return context
 
 
@@ -62,11 +56,11 @@ class ContentUpdateView(LoginRequiredMixin, UpdateView):
             'main:detail', kwargs={'pk': self.object.pk})
 
     def get(self, request, *args, **kwargs):
-        content_creator = self.get_object().creator
-        if content_creator == request.user:
+        content = self.get_object()
+        if content.is_created_by(request.user):
             return super().get(request, *args, **kwargs)
         else:
-            raise PermissionDenied("投稿ユーザー以外は投稿を削除できません。")
+            raise PermissionDenied("投稿ユーザー以外は投稿を編集できません。")
 
 
 class ContentDeleteView(LoginRequiredMixin, DeleteView):
