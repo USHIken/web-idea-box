@@ -5,5 +5,4 @@ django-extensions
 ipython
 PIllow
 beautifulsoup4
-selenium
 requests

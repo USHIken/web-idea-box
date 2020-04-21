@@ -1,11 +1,6 @@
 import re
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 
 # コンテンツのタイプ一覧
@@ -86,14 +81,19 @@ class EmbedHTML(object):
             self.url = self.url[:-1]
         return self.url
 
+    def get_bs4_html(self):
+        # プロジェクトURLのHTML取得
+        r = requests.get(self.url)
+        html = BeautifulSoup(r.text)
+        return html
+
     def get_scratch_embed_html(self):
         embed_html = f'<iframe src="{self.url}/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>'  # noqa: E501
         return embed_html
 
     def get_unityroom_embed_html(self):
         # プロジェクトURLのHTML取得
-        r = requests.get(self.url)
-        html = BeautifulSoup(r.text)
+        html = self.get_bs4_html()
         # aタグからWebGLのURLを取得
         a_tag = html.select_one("div.spec-games-center a[target='_blank']")
         webgl_url = a_tag.get("href")
@@ -102,26 +102,27 @@ class EmbedHTML(object):
         return embed_html
 
     def get_sketchfab_embed_html(self):
-        # seleniumドライバのセットアップ
-        options = Options()
-        options.add_argument('--headless')
-        options.add_argument('--window-size=1080,1080')
-        driver = webdriver.Chrome(chrome_options=options)
-        # プロジェクトURLにアクセス
-        driver.get(self.url)
-        # EmbedHTMLを取得するためのボタンをクリック
-        selector = "button[title='Embed']"
-        embed_button = driver.find_elements_by_css_selector(selector)[0]
-        embed_button.click()
-        # EmbedHTMLを持つ要素が表示されるまで待つ
-        class_name = "CodeMirror-code"
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, class_name)))
-        # EmbedHTMLを取得
-        embed_elm = driver.find_elements_by_class_name(class_name)[0]
-        html_plain = embed_elm.get_attribute("innerHTML")
-        html_bs4 = BeautifulSoup(html_plain).text
-        embed_html = re.sub(" \xa0", "", html_bs4)
+        # プロジェクトURLのHTML取得
+        html = self.get_bs4_html()
+        # プロジェクト投稿ユーザーのSketchfabURL取得
+        user_link = html.select_one("a.user-name__link").get("href")
+        # プロジェクトURLの32文字のID取得
+        project_id = re.search(r"[a-f0-9]{32}", self.url).group(0)
+
+        # 埋め込み用iframeの生成
+        iframe_src = f'https://sketchfab.com/models/{project_id}/embed?preload=1&amp;ui_controls=1&amp;ui_infos=1&amp;ui_inspector=1&amp;ui_stop=1&amp;ui_watermark=1&amp;ui_watermark_link=1'  # noqa: E501
+        iframe = f'<iframe title="A 3D model" width="640" height="480" src="{iframe_src}" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'  # noqa: E501
+
+        # 埋め込み用プロジェクト概要HTMLの生成
+        title_a = f'<a href="{self.url}?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sakana</a>'  # noqa: E501
+        user_link_a = f'by <a href="{user_link}?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Meimei</a>'  # noqa: E501
+        content_desc_p = f'<p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;">{title_a}{user_link_a}</p>'  # noqa: E501
+
+        # 埋め込み用SketchfabリンクHTMLの生成
+        sketchfab_a = 'on <a href="https://sketchfab.com?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>'  # noqa: E501
+
+        # 埋め込み用HTMLの生成
+        embed_html = f'<div class="sketchfab-embed-wrapper">{iframe}{content_desc_p}{sketchfab_a}</div>'  # noqa: E501
         return embed_html
 
     def get_web_embed_html(self):
