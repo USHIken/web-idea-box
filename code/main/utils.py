@@ -20,6 +20,8 @@ CONTENT_TYPES = (
     (OTHER, "Other"),
 )
 
+EMBED_TYPES = [SCRATCH, UNITY, WEB, ARTWORK3D]
+
 
 class EmbedHTML(object):
     def __init__(self, content_type, project_url):
@@ -28,9 +30,12 @@ class EmbedHTML(object):
         self.ERRORS = {
             "invalid_url": "URLが間違っています。"
         }
-        self.clean_url()
+        if self.type in EMBED_TYPES:
+            self.clean_url()
 
     def get(self):
+        if self.type not in EMBED_TYPES:
+            return ""
         if not self.is_valid_url():
             return self.ERRORS["invalid_url"]
         if self.type == SCRATCH:
@@ -115,14 +120,12 @@ class EmbedHTML(object):
 
         # 埋め込み用プロジェクト概要HTMLの生成
         title_a = f'<a href="{self.url}?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sakana</a>'  # noqa: E501
-        user_link_a = f'by <a href="{user_link}?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Meimei</a>'  # noqa: E501
-        content_desc_p = f'<p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;">{title_a}{user_link_a}</p>'  # noqa: E501
-
-        # 埋め込み用SketchfabリンクHTMLの生成
-        sketchfab_a = 'on <a href="https://sketchfab.com?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>'  # noqa: E501
+        user_link_a = f' by <a href="{user_link}?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Meimei</a>'  # noqa: E501
+        sketchfab_a = ' on <a href="https://sketchfab.com?utm_medium=embed&utm_source=website&utm_campaign=share-popup" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a>'  # noqa: E501
+        content_desc_p = f'<p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;">{title_a}{user_link_a}{sketchfab_a}</p>'  # noqa: E501
 
         # 埋め込み用HTMLの生成
-        embed_html = f'<div class="sketchfab-embed-wrapper">{iframe}{content_desc_p}{sketchfab_a}</div>'  # noqa: E501
+        embed_html = f'<div class="sketchfab-embed-wrapper">{iframe}{content_desc_p}</div>'  # noqa: E501
         return embed_html
 
     def get_web_embed_html(self):
