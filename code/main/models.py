@@ -10,6 +10,14 @@ from main import utils
 from main.utils import EmbedHTML
 
 
+class TimeStampedModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
 class Content(models.Model):
 
     # 画像ファイルの保存場所
@@ -42,7 +50,7 @@ class Content(models.Model):
     def is_embed_type(self):
         """コンテンツ埋め込みタイプであるかどうか"""
         return self.content_type in utils.EMBED_TYPES
-    
+
     def is_created_by(self, user):
         """コンテンツ投稿者であるかどうか"""
         return self.creator == user
