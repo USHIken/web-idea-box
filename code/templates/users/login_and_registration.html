@@ -8,8 +8,9 @@
         {% csrf_token %}
         <label for="id_username" class="label-username">ユーザー名</label>
         {{form.username}}
-
-        {% if request.path == '/users/login/' %}
+        
+        {% url 'users:login' as login_url %}
+        {% if request.path == login_url %}
 
         <label for="id_password" class="label-password">パスワード</label>
         {{form.password}}
