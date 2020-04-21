@@ -1,7 +1,11 @@
 from django.urls import path
 
-from . import views
+from main import views
+
+
+app_name = 'main'
 
 urlpatterns = [
-    path('', views.ContentList.as_view(), name='index'),
+    path('', views.ContentListView.as_view(), name='index'),
+    path('detail/<int:pk>', views.ContentDetailView.as_view(), name='detail'),
 ]
