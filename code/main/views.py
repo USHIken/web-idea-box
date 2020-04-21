@@ -1,10 +1,11 @@
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.views.generic import (
-    ListView, DetailView, DeleteView
+    ListView, DetailView, DeleteView, CreateView
 )
 
 from main import utils
+from main.forms import ContentCreateForm
 from main.models import Content
  
 
@@ -16,6 +17,20 @@ class ContentListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class ContentCreateView(CreateView):
+    template_name = "main/create.html"
+    model = Content
+    form_class = ContentCreateForm
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'main:detail', kwargs={'pk': self.object.pk})
 
 
 class ContentDetailView(DetailView):
