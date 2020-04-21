@@ -14,6 +14,8 @@
     <p>{{content.description}}</p>
 </div>
 
+<a href="{% url 'main:update' content.pk %}">編集</a>
+
 <form action="{% url 'main:delete' content.pk %}" method="post" onsubmit="return confirm_cancel('{{content.title}}を削除しますか？')">
     {% csrf_token %}
     <input type="submit" value="削除">

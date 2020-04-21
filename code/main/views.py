@@ -2,13 +2,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.views.generic import (
-    ListView, DetailView, DeleteView, CreateView
+    ListView, DetailView, DeleteView,
+    CreateView, UpdateView,
 )
 
 from main import utils
-from main.forms import ContentCreateForm
+from main.forms import ContentCreateForm, ContentUpdateForm
 from main.models import Content
- 
+
 
 class ContentListView(ListView):
     template_name = "main/index.html"
@@ -21,7 +22,7 @@ class ContentListView(ListView):
 
 
 class ContentCreateView(LoginRequiredMixin, CreateView):
-    template_name = "main/create.html"
+    template_name = "main/create_and_update.html"
     model = Content
     form_class = ContentCreateForm
     login_url = reverse_lazy('users:login')
@@ -44,6 +45,27 @@ class ContentDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["is_embed"] = self.object.content_type in utils.EMBED_TYPES
         return context
+
+
+class ContentUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = "main/create_and_update.html"
+    model = Content
+    form_class = ContentUpdateForm
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy(
+            'main:detail', kwargs={'pk': self.object.pk})
+
+    def get(self, request, *args, **kwargs):
+        content_creator = self.get_object().creator
+        if content_creator == request.user:
+            return super().get(request, *args, **kwargs)
+        else:
+            raise PermissionDenied("投稿ユーザー以外は投稿を削除できません。")
 
 
 class ContentDeleteView(LoginRequiredMixin, DeleteView):

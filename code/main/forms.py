@@ -7,4 +7,11 @@ class ContentCreateForm(forms.ModelForm):
 
     class Meta:
         model = Content
-        fields = ("title", "description", "content_type", "thumbnail", "url")
+        fields = ("content_type", "title", "description", "thumbnail", "url")
+
+
+class ContentUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Content
+        fields = ("title", "description", "thumbnail", "url")
