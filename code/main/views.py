@@ -44,6 +44,7 @@ class ContentDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["is_embed"] = self.object.content_type in utils.EMBED_TYPES
+        context["is_creator"] = self.object.creator == self.request.user
         return context
 
 

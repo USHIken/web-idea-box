@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="content-card">
-    <h5>{{content.title}}</h5>
+    <h5>{{content.title}} - {{content.creator}}</h5>
     {% if is_embed %}
     {{content.embed_html|safe}}
     {% endif %}
@@ -14,12 +14,15 @@
     <p>{{content.description}}</p>
 </div>
 
+{% if is_creator %}
 <a href="{% url 'main:update' content.pk %}">編集</a>
 
 <form action="{% url 'main:delete' content.pk %}" method="post" onsubmit="return confirm_cancel('{{content.title}}を削除しますか？')">
     {% csrf_token %}
     <input type="submit" value="削除">
 </form>
+{% endif %}
+
 {% endblock %}
 
 {% block scripts %}
