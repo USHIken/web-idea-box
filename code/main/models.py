@@ -35,6 +35,9 @@ class Content(models.Model):
     url = models.URLField(blank=True, null=False, default="")
     embed_html = models.TextField(blank=True, null=False)
 
+    def __str__(self):
+        return f'{self.content_type}: {self.title}'
+
 
 @receiver(pre_save, sender=Content)
 def blog_post_model_pre_save_receiver(sender, instance, *args, **kwargs):
