@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -19,10 +20,11 @@ class ContentListView(ListView):
         return context
 
 
-class ContentCreateView(CreateView):
+class ContentCreateView(LoginRequiredMixin, CreateView):
     template_name = "main/create.html"
     model = Content
     form_class = ContentCreateForm
+    login_url = reverse_lazy('users:login')
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -44,7 +46,7 @@ class ContentDetailView(DetailView):
         return context
 
 
-class ContentDeleteView(DeleteView):
+class ContentDeleteView(LoginRequiredMixin, DeleteView):
     model = Content
     success_url = reverse_lazy('main:index')
 
