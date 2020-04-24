@@ -2,7 +2,7 @@ import os
 import uuid
 
 from django.db import models
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_delete
 from django.dispatch import receiver
 
 from users.models import User
@@ -57,5 +57,34 @@ class Content(models.Model):
 
 
 @receiver(pre_save, sender=Content)
-def blog_post_model_pre_save_receiver(sender, instance, *args, **kwargs):
+def auto_fill_embed_html_pre_save(sender, instance, *args, **kwargs):
+    """コンテンツ保存前にURLに合わせて埋め込み用のHTMLを生成して入力する"""
     instance.embed_html = EmbedHTML(instance.content_type, instance.url).get()
+
+
+@receiver(post_delete, sender=Content)
+def auto_remove_image_file_post_delete(sender, instance, *args, **kwargs):
+    """コンテンツ削除時に画像削除"""
+    if instance.thumbnail:
+        if os.path.isfile(instance.thumbnail.path):
+            os.remove(instance.thumbnail.path)
+
+
+@receiver(pre_save, sender=Content)
+def auto_remove_image_on_change(sender, instance, **kwargs):
+    """画像変更時に元画像削除"""
+    if not instance.pk:
+        return False
+
+    try:
+        old_file = Content.objects.get(pk=instance.pk).thumbnail
+    except Content.DoesNotExist:
+        return False
+
+    if not bool(old_file):
+        return False
+
+    new_file = instance.thumbnail
+    if not old_file == new_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
