@@ -1,0 +1,194 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "NotoSansJP-Light";
+    src: url(../font/NotoSansJP-Light.otf);
+}
+
+@font-face {
+    font-family: "NotoSansJP-Bold";
+    src: url(../font/NotoSansJP-Bold.otf);
+}
+
+/* ============= Smartphone 基本設定 ============= */
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    text-decoration: none;
+    font-family: "NotoSansJP-Light";
+}
+
+img {
+    width: 100%;
+}
+
+body {
+    display: grid;
+}
+
+/* ------------- header ------------- */
+header {
+    height: 100vh;
+}
+
+header figure {
+    height: 100vh;
+}
+
+header img {
+    height: 100%;
+    object-fit: cover;
+    vertical-align: bottom;
+}
+
+header #topImage {
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+}
+
+/* ------------- main ------------- */
+main > div > a {
+    display: block;
+} 
+
+main h2 {
+    color: #ec6c2b;
+    text-align: center;
+    margin: 30px 0;
+    font-family: "NotoSansJP-Bold";
+}
+
+main div > a {
+    border-bottom: dashed 1px rgba(0, 0, 0, 0.2);
+}
+
+main div > a:last-of-type {
+    border: none;
+}
+
+main article > div {
+    display: flex;
+    padding-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+main article > div img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+main article > div p {
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 20px;
+    align-self: center;
+}
+
+main article > div time {
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left:auto;
+    margin-right: 20px;
+    align-self: center;
+}
+
+main article > figure img {
+    height: 50vw;
+    object-fit: cover;
+    vertical-align: bottom;
+}
+
+main article > figure figcaption {
+    color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+}
+
+main > div > p {
+    
+}
+
+main > div > p a {
+    padding: 10px 30px;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #ec6c2b;
+    border: solid 1px #000000;
+}
+
+/* ------------- footer ------------- */
+footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 20px;
+    height: 100px;
+    background-color: #ec6c2b;
+}
+
+footer a {
+    align-self: center;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+footer i {
+    margin-right: 5px;
+}
+
+
+/* ============= Personal Computer 基本設定 ============= */
+@media (min-width: 700px) {
+    main {
+        display: grid;
+        grid-template-columns: 1fr 8fr 1fr;
+    }
+
+    main > * {
+        grid-column: 2 / -2;
+    }
+    
+    main > div {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 10%;
+        column-gap: 10%;
+    }
+
+    main h2 {
+        grid-column: 1 / -1;
+        font-size: 40px;
+        margin: 50px 0;
+        
+    }
+
+    main div > a:nth-last-of-type(-n+2) {
+        border: none;
+    }
+
+    main article > div {
+        padding-left: 0px;
+        margin-top: 20px;
+    }
+    
+    main article > figure img {
+        height: 20vw;
+    }
+
+    main article > div time {
+        font-size: 15px;
+        margin-right: 0px;
+    }
+    
+     main article > figure figcaption {
+        font-size: 20px;
+        padding: 20px 0;
+    }
+}
