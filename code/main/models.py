@@ -18,7 +18,7 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 
-class Content(models.Model):
+class Content(TimeStampedModel):
 
     # 画像ファイルの保存場所
     def get_image_path(self, filename):
