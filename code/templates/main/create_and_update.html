@@ -4,15 +4,21 @@
 {% block content %}
 {% url 'main:create' as create_url %}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {% if request.path !=  create_url %}<p>{{object.content_type}}</p>{% endif %}
-    {{form}}
+
+    {% if request.path !=  create_url %}
+    <p>{{object.content_type}}</p>
+    {% endif %}
+
+    {{form}}
+
     {% if request.path ==  create_url %}
     <input type="submit" value="投稿">
     {% else %}
     <input type="submit" value="更新">
     {% endif %}
+
 </form>
 {{form.errors}}
 
