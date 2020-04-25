@@ -37,8 +37,7 @@ class Content(models.Model):
     content_type = models.CharField(
         choices=utils.CONTENT_TYPES, default=utils.SCRATCH, max_length=32)
     # 一覧で表示される画像
-    thumbnail = models.ImageField(
-        upload_to=get_image_path, blank=True, null=True)
+    thumbnail = models.ImageField(upload_to=get_image_path)
     # プロジェクトの各種サイトURL
     url = models.URLField(blank=True, null=False, default="")
     embed_html = models.TextField(blank=True, null=False)
