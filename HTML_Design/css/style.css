@@ -1,23 +1,17 @@
 @charset "UTF-8";
 
 @font-face {
-    font-family: "NotoSansJP-Light";
-    src: url(../font/NotoSansJP-Light.otf);
+    font-family: 'HackGen35Console-Regular-forPowerline';
+    src: url(../font/HackGen35Console-Regular-forPowerline.ttf);
 }
 
-@font-face {
-    font-family: "NotoSansJP-Bold";
-    src: url(../font/NotoSansJP-Bold.otf);
-}
-
-/* ============= Smartphone 基本設定 ============= */
-
+/* ////////////////// 全デバイスの基本設定 ////////////////// */
 * {
     padding: 0;
     margin: 0;
     border: 0;
     text-decoration: none;
-    font-family: "NotoSansJP-Light";
+    font-family: 'HackGen35Console-Regular-forPowerline', sans-serif;
 }
 
 img {
@@ -26,12 +20,11 @@ img {
 
 body {
     display: grid;
-    /* grid-template-rows:
-            [head] 100vh
-            [main] auto; */
+    grid-template-columns: auto 1fr;
 }
 
-/* ------------- header ------------- */
+/* ////////////////// Smartphone 基本設定 ////////////////// */
+/* ================== header ================== */
 header {
     grid-column: 1 / -1;
     grid-row: 1;
@@ -53,10 +46,11 @@ header #topImage {
     grid-row: 1 / -1;
 }
 
-/* ------------- main ------------- */
+/* ================== main ================== */
 main {
     grid-column: 1 / -1;
     grid-row: main;
+    overflow: hidden;
 }
 
 main > div {
@@ -67,54 +61,57 @@ main > div:nth-last-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-main > div > a {
+main section > a {
     display: block;
 } 
 
 main h2 {
     font-size: 30px;
+    font-weight: bold;
     color: #ec6c2b;
     text-align: center;
     margin-bottom: 30px;
-    font-family: "NotoSansJP-Bold";
 }
 
-main div > a {
+main h3 {
+    color: #000000;
+    margin: 20px 0 20px 20px;
+}
+
+main section > a {
+    padding: 20px 0;
     border-bottom: dashed 1px rgba(0, 0, 0, 0.2);
 }
 
-main div > a:last-of-type {
+main section > a:last-of-type {
     border: none;
 }
 
 main article > div {
     display: flex;
-    padding-left: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 main article > div img {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     object-fit: cover;
     border-radius: 50%;
 }
 
 main article > div p {
     color: #000000;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
-    padding-left: 20px;
+    margin-left: 20px;
     align-self: center;
 }
 
 main article > div time {
     color: #000000;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     margin-left:auto;
-    margin-right: 20px;
     align-self: center;
 }
 
@@ -131,42 +128,42 @@ main article > figure figcaption {
     padding: 20px;
 }
 
-main > div > p {
+main > div > section > p {
     text-align: center;
-    padding-bottom: 20px;
+    padding: 20px 0 40px;
 }
 
-main > div > p a {
+main > div > section > p a {
     display: inline-block;
     padding: 10px 30px;
     color: #ffffff;
+    font-size: 18px;
     font-weight: bold;
     transition: background-color 0.5s;
     background-color: #ec6c2b;
     border-radius: 10px;
 }
 
-main > div > p a:hover {
+main > div > section > p a:hover {
     transition: background-color 0.5s;
-    background-color: #000000;
+    background-color: #ff4500 ;
 }
 
-/* ------------- main ------------- */
+/* ================== nav ================== */
 nav {
-    grid-column: 1 / -1;
-    grid-row: 1 / -1;
-    width: 250px;
-    margin-left: -250px;
-    /* background-color: rgba(0, 0, 0, 0.7); */
+    top: 0;
+    width: 270px;
+    margin-left: -270px;
     background-color: rgba(236, 108, 43, 0.7);
     z-index: 100;
     position: relative;
-    transition: margin-left 0.2s ease-out;
+    position: fixed;
+    transition: margin-left 1s;
 }
 
 .menuBar nav {
     margin-left: 0;
-    transition: margin-left 0.2s ease-out;
+    transition: margin-left 1s;
 }
 
 nav ul {
@@ -183,119 +180,277 @@ nav li a {
     border-bottom: dashed 1px #ffffff;
 }
 
+nav li:nth-of-type(2) a {
+    border-bottom: solid 1px #ffffff;
+}
+
 nav li a:hover {
-    /* background-color: rgba(0, 0, 0, 0.8); */
     background-color: rgba(236, 108, 43, 0.9);
 }
 
 button {
-    /* display: inline; */
-    grid-column: 1 / -1;
-    grid-row: 1;
-    justify-self: start;
-    align-self: start;
-    padding: 4px;
-    margin-left: 10px;
+    top: 10px;
+    left: 20px;    
     color: #ffffff;
     font-size: 30px;
+    text-shadow: 0 0 2px #000000;
     background-color: transparent;
     cursor: pointer;
-    transition: margin-left 0.2s ease-out;
+    transition: left 1s;
     z-index: 100;
-    position: relative;
+    position: fixed;
 }
 
 .menuBar button {
-    margin-left: 260px;
-    transition: margin-left 0.2s ease-out;
+    left: 290px;
+    transition: left 1s;
+}
+
+button + a {
+    bottom: 0;
+    padding: 4px;
+    color: #ffffff;
+    text-shadow: 0 0 2px #000000;
+    right: 0;
+    margin-right: 10px;
+    color: #ffffff;
+    font-size: 40px;
+    text-shadow: 0 0 2px #000000;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 50;
+    position: fixed;
+}
+
+.page-cover {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 75;
+    position: fixed;
 }
 
 .menuBar .page-cover {
-    grid-column: 1 / -1;
-    grid-row: 1 / -1;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 50;
-    position: relative;
+    display: block;
 }
 
 .menuBar {
-    height: 100vh;
     overflow: hidden;
 }
 
-html {
-    overflow-y: scroll;
+/* ================== footer ================== */
+footer {
+    display: grid;
+    grid-template-columns: 1fr minmax(auto, 500px) 1fr;
+    background-color: #ec6c2b;
 }
 
-/* ------------- footer ------------- */
-footer {
+footer  div {
+    grid-column: 2;
     display: flex;
     justify-content: space-around;
     padding: 0 20px;
     height: 100px;
-    background-color: #ec6c2b;
 }
 
-footer a {
+footer div a {
     align-self: center;
     font-weight: bold;
     color: #ffffff;
 }
 
-footer i {
+footer div i {
     margin-right: 5px;
 }
 
-
-/* ============= Personal Computer 基本設定 ============= */
-@media (min-width: 700px) {
-    main {
-        display: grid;
-        grid-template-columns: 1fr 8fr 1fr;
+/* ////////////////// Tablet 基本設定 ////////////////// */
+@media (min-width: 700px) and (max-width:1199px) {
+    body > * {
+        grid-column: 2 / -1;
     }
 
-    main > * {
-        grid-column: 2 / -2;
-    }
-    
+    /* ================== header ================== */
+
+    /* ================== mian ================== */
     main > div {
         display: grid;
+        grid-template-columns: 50px 1fr 50px;
+    }
+
+    main > div > section {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-column-gap: 10%;
-        column-gap: 10%;
+        grid-column-gap: 5%;
+        column-gap: 5%;
+
+        grid-column: 2;
+    }
+
+    main > div > section > p {
+        grid-column: 1 / -1;
     }
 
     main h2 {
         grid-column: 1 / -1;
         font-size: 40px;
         margin: 50px 0;
-        
     }
 
-    main div > a:nth-last-of-type(-n+2) {
+    main section > a:nth-last-of-type(-n+2) {
         border: none;
     }
 
-    main article > div {
-        padding-left: 0px;
-        margin-top: 20px;
+    main h3 {
+        margin-left: 0;
+        font-size: 25px;
     }
-    
+
     main article > figure img {
         height: 20vw;
     }
 
-    main article > div time {
-        font-size: 15px;
-        margin-right: 0px;
-    }
-    
-     main article > figure figcaption {
-        font-size: 20px;
-        padding: 20px 0;
+    main article > div {
+        padding-left: 0px;
+        margin: 20px 0;
     }
 
-    main > div > p {
+    main article > div > img {
+        width: 50px;
+        height: 50px;
+    }
+
+    main article > div > p {
+        font-size: 18px;
+        margin-left: 15px;
+    }
+
+    main article > div time {
+        font-size: 18px;
+        margin-right: 0px;
+    }
+
+    main > div > section > p {
+        padding: 80px 0;
+    }
+    
+    main > div > section > p a {
+        font-size: 20px;
+        padding: 15px 50px;
+        border-radius: 15px;
+    }
+
+    /* ================== nav ================== */
+    #nav{
+        grid-column: 1;
+        width: 0px;
+        transition: width 1s;
+    }
+
+    nav li a {
+        padding: 17px;
+        font-size: 17px;
+    }
+
+    /* ================== footer ================== */
+}
+
+/* ////////////////// Personal Computer 基本設定 ////////////////// */
+@media (min-width: 1200px) {
+    body > * {
+        grid-column: 2 / -1;
+    }
+
+    /* ================== header ================== */
+
+    /* ================== mian ================== */
+    main > div {
+        display: grid;
+        grid-template-columns: 50px 1fr 50px;
+    }
+
+    main > div > section {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 5%;
+        column-gap: 5%;
+
+        grid-column: 2 / -2;
+    }
+
+    main > div > section > p {
         grid-column: 1 / -1;
     }
+
+    main h2 {
+        grid-column: 1 / -1;
+        font-size: 40px;
+        margin: 50px 0;
+    }
+
+    main section > a:nth-last-of-type(-n+3) {
+        border: none;
+    }
+
+    main h3 {
+        margin-left: 0;
+        font-size: 22px;
+    }
+
+    main article > figure img {
+        height: 12.5vw;
+    }
+
+    main article > div {
+        padding-left: 0px;
+        margin: 20px 0;
+    }
+
+    main article > div > img {
+        width: 30px;
+        height: 30px;
+    }
+
+    main article > div > p {
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    main article > div time {
+        font-size: 16px;
+        margin-right: 0px;
+    }
+
+    main > div > section > p {
+        padding: 100px 0;
+    }
+    
+    main > div > section > p a {
+        font-size: 20px;
+        padding: 15px 50px;
+        border-radius: 15px;
+    }
+    
+    /* ================== nav ================== */
+    #nav{
+        grid-column: 1;
+        width: 270px;
+        transition: width 1s;
+    }
+    
+    nav {
+        margin-left: 0;
+    }
+
+    nav li a {
+        padding: 17px;
+        font-size: 17px;
+    }
+
+    button {
+        display: none;
+    }
+
+    /* ================== footer ================== */
+
 }
