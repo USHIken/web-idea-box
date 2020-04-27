@@ -14,8 +14,12 @@
     font-family: 'HackGen35Console-Regular-forPowerline', sans-serif;
 }
 
-img {
+img, iframe {
     width: 100%;
+}
+
+html {
+    height: 100vh;
 }
 
 body {
@@ -27,7 +31,6 @@ body {
 /* ================== header ================== */
 header {
     grid-column: 1 / -1;
-    grid-row: 1;
     height: 100vh;
 }
 
@@ -49,7 +52,7 @@ header #topImage {
 /* ================== main ================== */
 main {
     grid-column: 1 / -1;
-    grid-row: main;
+    min-height: calc(100vh - 100px);
     overflow: hidden;
 }
 
@@ -149,6 +152,26 @@ main > div > section > p a:hover {
     background-color: #ff4500 ;
 }
 
+main > div > section > div {
+    display: flex;
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin: 100px 0;
+    width: 500px;
+    justify-content:space-around;
+} 
+
+main > div > section > div p {
+    font-size: 15px;
+}
+
+main > div > section > div a {
+    color: #ffffff;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: #ec6c2b;
+}
+
 /* ================== nav ================== */
 nav {
     top: 0;
@@ -174,9 +197,9 @@ nav ul {
 
 nav li a {
     display: block;
-    padding: 10px 20px;
+    padding: 17px;
     color: #ffffff;
-    font-size: 20px;
+    font-size: 17px;
     border-bottom: dashed 1px #ffffff;
 }
 
@@ -264,6 +287,36 @@ footer div i {
     margin-right: 5px;
 }
 
+/* ~~~~~~~~~~~~~~~~~~ Smartphone 基本設定 ~~~~~~~~~~~~~~~~~~ */
+.artwork {
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    /* grid-template-rows: 100px 45vw; */
+}
+
+.artwork > * {
+    grid-column: 2;
+}
+
+.artwork h3 {
+    justify-self: center;
+    align-self: center;
+    margin: 0;
+    font-size: 20px;
+    text-shadow: 0 0 1px #000000;
+}
+
+.artwork figure {
+    height: 45vw;
+}
+
+.artwork iframe {
+    height: 100%;
+    vertical-align: bottom;
+}
+
+
+
 /* ////////////////// Tablet 基本設定 ////////////////// */
 @media (min-width: 700px) and (max-width:1199px) {
     body > * {
@@ -347,12 +400,8 @@ footer div i {
         transition: width 1s;
     }
 
-    nav li a {
-        padding: 17px;
-        font-size: 17px;
-    }
-
     /* ================== footer ================== */
+
 }
 
 /* ////////////////// Personal Computer 基本設定 ////////////////// */
@@ -440,11 +489,6 @@ footer div i {
     
     nav {
         margin-left: 0;
-    }
-
-    nav li a {
-        padding: 17px;
-        font-size: 17px;
     }
 
     button {
