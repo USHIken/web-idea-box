@@ -34,7 +34,7 @@
             <section>
                 <h2>{{ content_type }}</h2>
                 {% for content in content_list %}
-                <a href="#">
+                <a href="{% url 'main:detail' content.pk %}">
                     <article>
                         <h3>{{ content.title }}</h3>
                         <figure>

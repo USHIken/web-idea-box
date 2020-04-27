@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filter %}
 
 {% block content %}
 
@@ -11,7 +12,7 @@
     {% if not content.is_embed_type and content.thumbnail %}
     <img src="{{content.thumbnail.url}}" alt="作品サムネイル">
     {% endif %}
-    <p>{{content.description}}</p>
+    <p>{{content.description|markdown_to_html_with_escape}}</p>
 </div>
 
 {% if is_creator %}
