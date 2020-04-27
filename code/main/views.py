@@ -42,7 +42,10 @@ class ContentListByTypeView(ListView):
         self.object_list = self.get_queryset(content_type)
         context = self.get_context_data()
         context["content_type"] = content_type
-        return self.render_to_response(context)
+        if len(self.object_list) == 0:
+            return render(request, '404.html', context, status=404)
+        else:
+            return self.render_to_response(context)
 
 
 class ContentCreateView(LoginRequiredMixin, CreateView):
@@ -102,6 +105,7 @@ class ContentDeleteView(LoginRequiredMixin, DeleteView):
             return self.delete(request, *args, **kwargs)
         else:
             raise PermissionDenied("投稿ユーザー以外は投稿を削除できません。")
+
 
 def mentor(request):
     return render(request, 'main/mentor.html')
