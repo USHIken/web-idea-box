@@ -346,6 +346,7 @@ footer div i {
     width: 70vw;
     padding: 10px;
     box-sizing: border-box;
+    transition: width 1s;
 }
 
 .long input:last-of-type {
@@ -452,6 +453,7 @@ input[type="submit"] {
         margin: 20px 0;
         width: 40vw;
         padding: 10px;
+        transition: width 1s;
     }
 
 }
@@ -556,6 +558,7 @@ input[type="submit"] {
         margin: 20px 0;
         width: 30vw;
         padding: 10px;
+        transition: width 1s;
     }
 
 }
