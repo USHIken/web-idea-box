@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!doctype html>
@@ -9,12 +10,8 @@
       <link rel="stylesheet" href="{% static 'css/style.css' %}">
   </head>
   <body>
-    <!-- ////////////////// header ////////////////// -->
-    <header>
-        <figure>
-            <img src="{% static 'img/topImage.jpg' %}" alt="Top Image">
-        </figure>
-    </header>
+    {% block header %}
+    {% endblock %}
 
     {% block content %}
     {% endblock %}

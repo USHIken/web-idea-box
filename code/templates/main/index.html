@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block header %}
+<!-- ////////////////// header ////////////////// -->
+<header>
+    <figure>
+        <img src="{% static 'img/topImage.jpg' %}" alt="Top Image">
+    </figure>
+</header>
+{% endblock %}
+
 {% block content %}
 
     <!-- ////////////////// main ////////////////// -->
@@ -69,5 +78,4 @@
 
 {% block scripts %}
 {{ block.super }}
-
 {% endblock %}

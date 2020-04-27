@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, DetailView, DeleteView,
@@ -100,3 +101,6 @@ class ContentDeleteView(LoginRequiredMixin, DeleteView):
             return self.delete(request, *args, **kwargs)
         else:
             raise PermissionDenied("投稿ユーザー以外は投稿を削除できません。")
+
+def mentor(request):
+    return render(request, 'main/mentor.html')
