@@ -4,16 +4,18 @@
 
 {% block content %}
 
-<div class="content-card">
-    <h5>{{content.title}} - {{content.creator}}</h5>
-    {% if content.is_embed_type %}
-    {{content.embed_html|safe}}
-    {% endif %}
-    {% if not content.is_embed_type and content.thumbnail %}
-    <img src="{{content.thumbnail.url}}" alt="作品サムネイル">
-    {% endif %}
+<main class="artwork">
+    <h3>{{ content.title }}</h3>
+    <figure>
+        {% if content.is_embed_type %}
+        {{content.embed_html|safe}}
+        {% endif %}
+        {% if not content.is_embed_type and content.thumbnail %}
+        <img src="{{content.thumbnail.url}}" alt="作品サムネイル">
+        {% endif %}
+    </figure>
     <p>{{content.description|markdown_to_html_with_escape}}</p>
-</div>
+</main>
 
 {% if is_creator %}
 <a href="{% url 'main:update' content.pk %}">編集</a>
