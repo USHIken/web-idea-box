@@ -11,7 +11,7 @@
     <p>{{object.content_type}}</p>
     {% endif %}
 
-    {{form}}
+    {{ form.as_p }}
 
     {% if request.path ==  create_url %}
     <input type="submit" value="投稿">
@@ -21,6 +21,7 @@
 
 </form>
 {{form.errors}}
+{{form.media}}
 
 {% endblock %}
 

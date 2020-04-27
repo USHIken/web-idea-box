@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div>
+        <h2>ページが見つかりません。</h2>
+        <section>
+            <div>
+                <p>
+                    <a href="#" onClick="history.back(); return false;">前のページにもどる</a>
+                </p>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+
+{% endblock %}

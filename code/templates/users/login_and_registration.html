@@ -3,35 +3,37 @@
 
 {% block content %}
 
-<div class="login_and_signup">
-    <form method="post">
-        {% csrf_token %}
-        <label for="id_username" class="label-username">ユーザー名</label>
-        {{form.username}}
-        
-        {% url 'users:login' as login_url %}
-        {% if request.path == login_url %}
+<main>
+    <div class="login_and_signup">
+        <form method="post">
+            {% csrf_token %}
+            <label for="id_username" class="label-username">ユーザー名</label>
+            {{form.username}}
+            
+            {% url 'users:login' as login_url %}
+            {% if request.path == login_url %}
 
-        <label for="id_password" class="label-password">パスワード</label>
-        {{form.password}}
-        <button id="login-button" style="background-color: #d8cf81;">ログイン</button>
+            <label for="id_password" class="label-password">パスワード</label>
+            {{form.password}}
+            <button id="login-button" style="background-color: #d8cf81;">ログイン</button>
 
-        {% else %}
+            {% else %}
 
-        <label for="id_password1" class="label-password1">パスワード</label>
-        {{form.password1}}
-        <label for="id_password2" class="label-password2">パスワード(確認)</label>
-        {{form.password2}}
+            <label for="id_password1" class="label-password1">パスワード</label>
+            {{form.password1}}
+            <label for="id_password2" class="label-password2">パスワード(確認)</label>
+            {{form.password2}}
 
-        <button id="signup-button" style="background-color: #a0cccb;">とうろく</button>
+            <button id="signup-button" style="background-color: #a0cccb;">とうろく</button>
 
-        {% endif %}
-    </form>
-    <div class="errorlist">
-    {% for key,error in form.errors.items %}
-        {{error}}
-    {% endfor %}
+            {% endif %}
+        </form>
+        <div class="errorlist">
+        {% for key,error in form.errors.items %}
+            {{error}}
+        {% endfor %}
+        </div>
     </div>
-</div>
+</main>
 
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, DetailView, DeleteView,
@@ -8,12 +9,43 @@ from django.views.generic import (
 
 from main.forms import ContentCreateForm, ContentUpdateForm
 from main.models import Content
+from main.utils import CONTENT_TYPES
 
 
 class ContentListView(ListView):
     template_name = "main/index.html"
     model = Content
     paginate_by = 20
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        content_list_by_type = {}
+        for content_type, _ in CONTENT_TYPES:
+            queryset = self.model.objects.filter(content_type=content_type)
+            content_list_by_type[content_type] = queryset[:6]
+        context["content_list_by_type"] = content_list_by_type
+        context["recent_contents"] = self.model.objects.all()[:6]
+        return context
+
+
+class ContentListByTypeView(ListView):
+    template_name = "main/content_list_by_type.html"
+    model = Content
+    paginate_by = 3
+
+    def get_queryset(self, content_type):
+        queryset = self.model.objects.filter(content_type=content_type)
+        queryset = queryset.order_by('-created_at')
+        return queryset
+
+    def get(self, request, content_type, *args, **kwargs):
+        self.object_list = self.get_queryset(content_type)
+        context = self.get_context_data()
+        context["content_type"] = content_type
+        if len(self.object_list) == 0:
+            return render(request, '404.html', context, status=404)
+        else:
+            return self.render_to_response(context)
 
 
 class ContentCreateView(LoginRequiredMixin, CreateView):
@@ -73,3 +105,7 @@ class ContentDeleteView(LoginRequiredMixin, DeleteView):
             return self.delete(request, *args, **kwargs)
         else:
             raise PermissionDenied("投稿ユーザー以外は投稿を削除できません。")
+
+
+def mentor(request):
+    return render(request, 'main/mentor.html')

@@ -9,6 +9,8 @@ from users.models import User
 from main import utils
 from main.utils import EmbedHTML
 
+from markdownx.models import MarkdownxField
+
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -32,14 +34,14 @@ class Content(TimeStampedModel):
     # タイトル
     title = models.CharField(max_length=64)
     # 説明
-    description = models.TextField(blank=True, null=False)
+    description = MarkdownxField(blank=True, null=True)
     # コンテンツのタイプ
     content_type = models.CharField(
         choices=utils.CONTENT_TYPES, default=utils.SCRATCH, max_length=32)
     # 一覧で表示される画像
     thumbnail = models.ImageField(upload_to=get_image_path)
     # プロジェクトの各種サイトURL
-    url = models.URLField(blank=True, null=False, default="")
+    url = models.URLField(blank=True, null=True, default="")
     embed_html = models.TextField(blank=True, null=False)
 
     def __str__(self):
@@ -59,16 +61,17 @@ class Content(TimeStampedModel):
 def validate_url_and_auto_fill_embed_html_pre_save(
         sender, instance: Content, *args, **kwargs):
     """URLのvalidation後、コンテンツ保存前にURLに合わせて埋め込み用のHTMLを生成して入力する"""
-    # URLのクリーニング
-    content_type = instance.content_type
-    url = utils.clean_content_url(instance.url, content_type)
-    instance.url = url
-    # URLのバリデーション
-    content_url_validator = utils.ContentURLValidator()
-    content_url_validator(url, content_type)
-    # safetyなURLから埋め込み用のHTMLを取得
-    get_embed_html = EmbedHTML(content_type, url)
-    instance.embed_html = get_embed_html()
+    if instance.url:
+        # URLのクリーニング
+        content_type = instance.content_type
+        url = utils.clean_content_url(instance.url, content_type)
+        instance.url = url
+        # URLのバリデーション
+        content_url_validator = utils.ContentURLValidator()
+        content_url_validator(url, content_type)
+        # safetyなURLから埋め込み用のHTMLを取得
+        get_embed_html = EmbedHTML(content_type, url)
+        instance.embed_html = get_embed_html()
 
 
 @receiver(post_delete, sender=Content)
