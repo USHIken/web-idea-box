@@ -57,6 +57,15 @@ class Content(TimeStampedModel):
         return self.creator == user
 
 
+# class Favorite(TimeStampedModel):
+#     content = models.OneToOneField(
+#         Content, related_name="likes", on_delete=models.CASCADE)
+#     users = models.ManyToManyField(User, related_name='likes')
+
+#     def __str__(self):
+#         return f'{self.content.title}'
+
+
 @receiver(pre_save, sender=Content)
 def validate_url_and_auto_fill_embed_html_pre_save(
         sender, instance: Content, *args, **kwargs):
