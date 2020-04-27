@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main>
+    <div>
+        <section>
+            <h2>{{ content_type }}</h2>
+            {% for content in object_list %}
+            {% include 'main/content_card.html' %}
+            {% endfor %}
+
+            <div>
+                {% if page_obj.has_previous %}
+                <p><a href="?page={{ page_obj.previous_page_number }}">前のページ</a></p>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <p><a href="?page={{ page_obj.next_page_number }}">次のページ</a></p>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+
+{% endblock %}
