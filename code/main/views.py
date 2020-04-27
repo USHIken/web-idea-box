@@ -29,8 +29,9 @@ class ContentListView(ListView):
 
 
 class ContentListByTypeView(ListView):
-    template_name = "main/index.html"
+    template_name = "main/content_list_by_type.html"
     model = Content
+    paginate_by = 3
 
     def get_queryset(self, content_type):
         queryset = self.model.objects.filter(content_type=content_type)
@@ -39,8 +40,8 @@ class ContentListByTypeView(ListView):
 
     def get(self, request, content_type, *args, **kwargs):
         self.object_list = self.get_queryset(content_type)
-        print(self.object_list)
         context = self.get_context_data()
+        context["content_type"] = content_type
         return self.render_to_response(context)
 
 

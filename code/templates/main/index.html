@@ -19,19 +19,7 @@
             <section>
                 <h2>最近の投稿</h2>
                 {% for content in recent_contents %}
-                <a href="{% url 'main:detail' content.pk %}">
-                    <article>
-                        <h3>{{ content.title }}</h3>
-                        <figure>
-                            <img src="{{ content.thumbnail.url }}" alt="">
-                        </figure>
-                        <div>
-                            <img src="{% static 'img/person.jpg' %}" alt="">
-                            <p>{{ content.creator.username }}</p>
-                            <time datetime="{{ content.created_at|date:'Y-m-d' }}">{{ content.created_at|date:"Y/m/d" }}</time>
-                        </div>
-                    </article>
-                </a>
+                {% include 'main/content_card.html' %}
                 {% endfor %}
             </section>
         </div>
@@ -39,28 +27,18 @@
 
         <!-- ////////////////// Scratch ////////////////// -->
         {% for content_type, content_list in content_list_by_type.items %}
+        {% if content_list %}
         <div id="{{ content_type }}">
             <section>
                 <h2>{{ content_type }}</h2>
                 {% for content in content_list %}
-                <a href="{% url 'main:detail' content.pk %}">
-                    <article>
-                        <h3>{{ content.title }}</h3>
-                        <figure>
-                            <img src="{{ content.thumbnail.url }}" alt="">
-                        </figure>
-                        <div>
-                            <img src="{% static 'img/person.jpg' %}" alt="">
-                            <p>{{ content.creator.username }}</p>
-                            <time datetime="{{ content.created_at|date:'Y-m-d' }}">{{ content.created_at|date:"Y/m/d" }}</time>
-                        </div>
-                    </article>
-                </a>
+                {% include 'main/content_card.html' %}
                 {% endfor %}
     
                 <p><a href="{% url 'main:list_by_type' content_type %}">もっと見る</a></p>
             </section>
         </div>
+        {% endif %}
         {% endfor %}
     </main>
 
