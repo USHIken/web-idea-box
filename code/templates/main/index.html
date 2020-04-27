@@ -3,64 +3,71 @@
 
 {% block content %}
 
-<div id="content-list">
+    <!-- ////////////////// main ////////////////// -->
+    <main>
+        <!-- ////////////////// 最近の投稿 ////////////////// -->
+        <div>
+            <section>
+                <h2>最近の投稿</h2>
+                {% for content in recent_contents %}
+                <a href="{% url 'main:detail' content.pk %}">
+                    <article>
+                        <h3>{{ content.title }}</h3>
+                        <figure>
+                            <img src="{{ content.thumbnail.url }}" alt="">
+                        </figure>
+                        <div>
+                            <img src="{% static 'img/person.jpg' %}" alt="">
+                            <p>{{ content.creator.name }}</p>
+                            <time datetime="{{ content.created_at|date:'Y-m-d' }}">{{ content.created_at|date:"Y/m/d" }}</time>
+                        </div>
+                    </article>
+                </a>
+                {% endfor %}
+            </section>
+        </div>
+        
 
-    {% for content in object_list %}
-    <div class="content-card">
-        <a href="{% url 'main:detail' content.pk %}">
-            <h5>{{content.title}}</h5>
-            <img src="{%if content.thumbnail %}{{content.thumbnail.url}}{% endif %}" alt="作品サムネイル">
-            <p>{{content.description}}</p>
-        </a>
-    </div>
-    {% endfor %}
+        <!-- ////////////////// Scratch ////////////////// -->
+        {% for content_type, content_list in content_list_by_type.items %}
+        <div id="{{ content_type }}">
+            <section>
+                <h2>{{ content_type }}</h2>
+                {% for content in content_list %}
+                <a href="#">
+                    <article>
+                        <h3>作品タイトル名</h3>
+                        <figure>
+                            <img src="{{ content.thumbnail.url }}" alt="">
+                        </figure>
+                        <div>
+                            <img src="{% static 'img/person.jpg' %}" alt="">
+                            <p>{{ content.creator.name }}</p>
+                            <time datetime="{{ content.created_at|date:'Y-m-d' }}">{{ content.created_at|date:"Y/m/d" }}</time>
+                        </div>
+                    </article>
+                </a>
+                {% endfor %}
+    
+                <p><a href="{% url 'main:list_by_type' content_type %}">もっと見る</a></p>
+            </section>
+        </div>
+        {% endfor %}
+    </main>
 
-    <div class="content-card" id="card-original" style="display: none;">
-        <a href="">
-            <h5></h5>
-            <img src="" alt="サンプル">
-            <p></p>
-        </a>
-    </div>
+{% endblock %}
 
-</div>
-
-
+{% block footer %}
+     <!-- ////////////////// footer ////////////////// -->
+     <footer>
+        <div>
+            <a href="https://twitter.com/login?lang=ja" target="_blank"><i class="fab fa-twitter"></i>Twitter</a>
+            <a href="https://ja-jp.facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i>Facebook</a>
+        </div>
+    </footer>
 {% endblock %}
 
 {% block scripts %}
 {{ block.super }}
-<!-- <script>
-var content = {
-    "title": "さくひん",
-    "image": "{% static 'images/sample.png' %}",
-    "description": "さくひんのせつめい。さくひんのせつめい。さくひんのせつめい。さくひんのせつめい。さくひんのせつめい。"
-}
-var contents = []
-for (i=0; i<10; i++) {
-    contents.push(content)
-}
 
-function append_content() {
-    console.log("append_content is called!")
-    content_list = document.getElementById("content-list")
-    contents.forEach(function(content){
-        console.log("append content")
-        content_elm = content_list.firstElementChild.cloneNode(true);
-        content_elm.style.display = ""
-        content_elm.id = ""
-        content_a = content_elm.getElementsByTagName("a")[0]
-        content_a.href = ""
-        content_a.getElementsByTagName("h5")[0].innerText = content["title"]
-        content_a.getElementsByTagName("img")[0].src = content["image"]
-        content_a.getElementsByTagName("p")[0].innerText = content["description"]
-        content_list.appendChild(content_elm)
-    })
-}
-
-window.onload = function() {
-    append_content()
-}
-
-</script> -->
 {% endblock %}

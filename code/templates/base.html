@@ -3,45 +3,72 @@
 <!doctype html>
 <html lang="ja">
   <head>
-    <title>newapp</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
-    <!-- Web Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <title>Idea Box</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
   </head>
   <body>
-    <div class="navbar">
-        <a href="{% url 'main:index' %}" class="logo">
-            <img src="{% static 'images/logo.png' %}" alt="ideabox">
-        </a>
-        {% if user.is_authenticated %}
-        <a href="{% url 'main:create' %}" class="upload">とうこう</a>
-        <a href="{% url 'users:logout' %}" class="logout">ログアウト</a>
-        {% else %}
-        <a href="{% url 'users:login' %}" class="login">ログイン</a>
-        <a href="{% url 'users:signup' %}" class="signup">とうろく</a>
-        {% endif %}
-    </div>
+    <!-- ////////////////// header ////////////////// -->
+    <header>
+        <figure>
+            <img src="{% static 'img/topImage.jpg' %}" alt="Top Image">
+        </figure>
+    </header>
 
-    <div class="main">
-        {% block content %}
-        {% endblock %}
+    {% block content %}
+    {% endblock %}
+
+    <!-- ////////////////// nav ////////////////// -->
+    <div id="nav">
+        <nav>
+            <ul>
+                <li><a href="{% url 'users:login' %}">ログイン</a></li>
+                <li><a href="{% url 'users:signup' %}">アカウント作成</a></li>
+                <li><a href="{% url 'main:index' %}">トップページ</a></li>
+                <li><a href="{% url 'main:list_by_type' 'scratch' %}">Scratch</a></li>
+                <li><a href="{% url 'main:list_by_type' 'unity' %}">Unity</a></li>
+                <li><a href="{% url 'main:list_by_type' 'web' %}">Web</a></li>
+                <li><a href="{% url 'main:list_by_type' 'artwork3d' %}">モデリング</a></li>
+                <li><a href="#">メンター紹介</a></li>
+            </ul>
+        </nav>
     </div>
+    <button type="button" onclick='menuBar()'>
+        <i class="fas fa-bars"></i>
+    </button>
+    <a href="#"><i class="far fa-arrow-alt-circle-up"></i></a>
+    <span class="page-cover" onclick="menuBar()"></span>
+
+    {% block footer %}
+    {% endblock %}
 
     {% block scripts %}
+    <!-- ////////////////// javascript ////////////////// -->
+    <script src="https://kit.fontawesome.com/0ca1bb9859.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
     <!-- Optional JavaScript -->
     <script src="{% static 'script/main.js' %}"></script>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <script>
+        //ページ内のリンク移動のスクロール処理
+        $(function(){
+        $('a[href^="#"]').click(function(){
+        var speed = 500;
+        var href= $(this).attr("href");
+        var target = $(href == "#" || href == "" ? 'html' : href);
+        var position = target.offset().top;
+        $("html, body").animate({scrollTop:position}, speed, "swing");
+        return false;
+        });
+        });
+
+        //menuBarの開閉
+        function menuBar(){
+            document.querySelector('body').classList.toggle('menuBar');
+        }
+    </script>
     {% endblock %}
   </body>
 </html>
