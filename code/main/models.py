@@ -61,16 +61,17 @@ class Content(TimeStampedModel):
 def validate_url_and_auto_fill_embed_html_pre_save(
         sender, instance: Content, *args, **kwargs):
     """URLのvalidation後、コンテンツ保存前にURLに合わせて埋め込み用のHTMLを生成して入力する"""
-    # URLのクリーニング
-    content_type = instance.content_type
-    url = utils.clean_content_url(instance.url, content_type)
-    instance.url = url
-    # URLのバリデーション
-    content_url_validator = utils.ContentURLValidator()
-    content_url_validator(url, content_type)
-    # safetyなURLから埋め込み用のHTMLを取得
-    get_embed_html = EmbedHTML(content_type, url)
-    instance.embed_html = get_embed_html()
+    if instance.url:
+        # URLのクリーニング
+        content_type = instance.content_type
+        url = utils.clean_content_url(instance.url, content_type)
+        instance.url = url
+        # URLのバリデーション
+        content_url_validator = utils.ContentURLValidator()
+        content_url_validator(url, content_type)
+        # safetyなURLから埋め込み用のHTMLを取得
+        get_embed_html = EmbedHTML(content_type, url)
+        instance.embed_html = get_embed_html()
 
 
 @receiver(post_delete, sender=Content)
