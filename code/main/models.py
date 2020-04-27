@@ -9,6 +9,8 @@ from users.models import User
 from main import utils
 from main.utils import EmbedHTML
 
+from markdownx.models import MarkdownxField
+
 
 class TimeStampedModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -32,14 +34,14 @@ class Content(TimeStampedModel):
     # タイトル
     title = models.CharField(max_length=64)
     # 説明
-    description = models.TextField(blank=True, null=False)
+    description = MarkdownxField(blank=True, null=True)
     # コンテンツのタイプ
     content_type = models.CharField(
         choices=utils.CONTENT_TYPES, default=utils.SCRATCH, max_length=32)
     # 一覧で表示される画像
     thumbnail = models.ImageField(upload_to=get_image_path)
     # プロジェクトの各種サイトURL
-    url = models.URLField(blank=True, null=False, default="")
+    url = models.URLField(blank=True, null=True, default="")
     embed_html = models.TextField(blank=True, null=False)
 
     def __str__(self):
