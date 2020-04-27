@@ -1,6 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block header %}
+<!-- ////////////////// header ////////////////// -->
+<header>
+    <figure>
+        <img src="{% static 'img/topImage.jpg' %}" alt="Top Image">
+    </figure>
+</header>
+{% endblock %}
+
 {% block content %}
 
     <!-- ////////////////// main ////////////////// -->
@@ -42,7 +51,7 @@
                         </figure>
                         <div>
                             <img src="{% static 'img/person.jpg' %}" alt="">
-                            <p>{{ content.creator.name }}</p>
+                            <p>{{ content.creator.username }}</p>
                             <time datetime="{{ content.created_at|date:'Y-m-d' }}">{{ content.created_at|date:"Y/m/d" }}</time>
                         </div>
                     </article>
@@ -69,5 +78,4 @@
 
 {% block scripts %}
 {{ block.super }}
-
 {% endblock %}

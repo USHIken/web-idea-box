@@ -122,6 +122,7 @@ main article > figure img {
     height: 50vw;
     object-fit: cover;
     vertical-align: bottom;
+    background-color: #eeeeee;
 }
 
 main article > figure figcaption {
