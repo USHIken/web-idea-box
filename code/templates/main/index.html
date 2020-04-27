@@ -18,7 +18,7 @@
                         </figure>
                         <div>
                             <img src="{% static 'img/person.jpg' %}" alt="">
-                            <p>{{ content.creator.name }}</p>
+                            <p>{{ content.creator.username }}</p>
                             <time datetime="{{ content.created_at|date:'Y-m-d' }}">{{ content.created_at|date:"Y/m/d" }}</time>
                         </div>
                     </article>
@@ -36,13 +36,13 @@
                 {% for content in content_list %}
                 <a href="#">
                     <article>
-                        <h3>作品タイトル名</h3>
+                        <h3>{{ content.title }}</h3>
                         <figure>
                             <img src="{{ content.thumbnail.url }}" alt="">
                         </figure>
                         <div>
                             <img src="{% static 'img/person.jpg' %}" alt="">
-                            <p>{{ content.creator.name }}</p>
+                            <p>{{ content.creator.username }}</p>
                             <time datetime="{{ content.created_at|date:'Y-m-d' }}">{{ content.created_at|date:"Y/m/d" }}</time>
                         </div>
                     </article>
