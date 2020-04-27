@@ -1,17 +1,18 @@
 @charset "UTF-8";
 
-@font-face {
+/* @font-face {
     font-family: 'HackGen35Console-Regular-forPowerline';
     src: url(../font/HackGen35Console-Regular-forPowerline.ttf);
-}
+} */
 
 /* ////////////////// 全デバイスの基本設定 ////////////////// */
 * {
     padding: 0;
     margin: 0;
     border: 0;
+    box-sizing: border-box;
     text-decoration: none;
-    font-family: 'HackGen35Console-Regular-forPowerline', sans-serif;
+    font-family: sans-serif;
 }
 
 img, iframe {
@@ -25,6 +26,7 @@ html {
 body {
     display: grid;
     grid-template-columns: auto 1fr;
+    min-height: 100vh;
 }
 
 /* ////////////////// Smartphone 基本設定 ////////////////// */
@@ -52,7 +54,7 @@ header #topImage {
 /* ================== main ================== */
 main {
     grid-column: 1 / -1;
-    min-height: calc(100vh - 100px);
+    margin-bottom: auto;
     overflow: hidden;
 }
 
@@ -267,6 +269,9 @@ footer {
     display: grid;
     grid-template-columns: 1fr minmax(auto, 500px) 1fr;
     background-color: #ec6c2b;
+    margin-top: auto;
+
+    /* bottom: 0; */
 }
 
 footer  div {
@@ -287,11 +292,11 @@ footer div i {
     margin-right: 5px;
 }
 
-/* ~~~~~~~~~~~~~~~~~~ Smartphone 基本設定 ~~~~~~~~~~~~~~~~~~ */
+/* ~~~~~~~~~~~~~~~~~~ .artwork ~~~~~~~~~~~~~~~~~~ */
 .artwork {
+    /* min-height: 100vh; */
     display: grid;
     grid-template-columns: 1fr 10fr 1fr;
-    /* grid-template-rows: 100px 45vw; */
 }
 
 .artwork > * {
@@ -301,21 +306,59 @@ footer div i {
 .artwork h3 {
     justify-self: center;
     align-self: center;
-    margin: 0;
+    margin: 30px 0;
     font-size: 20px;
     text-shadow: 0 0 1px #000000;
 }
 
-.artwork figure {
-    height: 45vw;
+.artwork > div {
+    background-color: transparent;
 }
 
-.artwork iframe {
+.artwork p {
+    margin: 50px 0;
+}
+
+.artwork figure {
+    height: 49vw;
+}
+
+.artwork iframe ,img {
     height: 100%;
     vertical-align: bottom;
 }
 
+/* ~~~~~~~~~~~~~~~~~~ .login ~~~~~~~~~~~~~~~~~~ */
+.login {
+    display: grid;
+    grid-template-rows: calc(100vh - 100px);
+    height: auto;
+}
 
+.login form {
+    justify-self: center;
+    align-self: center;
+}
+
+.login input {
+    margin: 20px 0;
+    border: solid 1px #000000;
+    width: 70vw;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.long input:last-of-type {
+    text-align: center;
+}
+
+input[type="submit"] {
+    background-color: #ec6c2b;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+}
 
 /* ////////////////// Tablet 基本設定 ////////////////// */
 @media (min-width: 700px) and (max-width:1199px) {
@@ -401,6 +444,15 @@ footer div i {
     }
 
     /* ================== footer ================== */
+
+    /* ~~~~~~~~~~~~~~~~~~ .artwork ~~~~~~~~~~~~~~~~~~ */
+
+    /* ~~~~~~~~~~~~~~~~~~ .login ~~~~~~~~~~~~~~~~~~ */
+    .login input {
+        margin: 20px 0;
+        width: 40vw;
+        padding: 10px;
+    }
 
 }
 
@@ -496,5 +548,14 @@ footer div i {
     }
 
     /* ================== footer ================== */
+
+    /* ~~~~~~~~~~~~~~~~~~ .artwork ~~~~~~~~~~~~~~~~~~ */
+
+    /* ~~~~~~~~~~~~~~~~~~ .login ~~~~~~~~~~~~~~~~~~ */
+    .login input {
+        margin: 20px 0;
+        width: 30vw;
+        padding: 10px;
+    }
 
 }
