@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>Idea Box</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- ////////////////// header ////////////////// -->
+    <!-- <header>
+        <figure>
+            <img src="../img/topImage.jpg" alt="Top Image">
+        </figure>
+    </header> -->
+
+    <!-- ////////////////// main ////////////////// -->
+    <main class="artwork">
+        <h3>作品タイトル名</h3>
+        <figure>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.223079958195!2d139.769548815178!3d35.69612763676245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188c0294f77a0f%3A0xb8f0800bdab96f72!2z44CSMTAxLTAwNDEg5p2x5Lqs6YO95Y2D5Luj55Sw5Yy656We55Sw6aCI55Sw55S677yS5LiB55uu77yT4oiS77yR77yWIOODpuODi-OCvuelnueUsOmgiOeUsOeUuuS6jOS4geebruODk-ODqyA2Rg!5e0!3m2!1sja!2sjp!4v1587966637416!5m2!1sja!2sjp"></iframe>
+        </figure>
+        <p>あ</p>
+    </main>
+
+    <!-- ////////////////// nav ////////////////// -->
+    <div id="nav">
+        <nav>
+            <ul>
+                <li><a href="#">ログイン</a></li>
+                <li><a href="#">アカウント作成</a></li>
+                <li><a href="../index.html">トップページ</a></li>
+                <li><a href="#">Scratch</a></li>
+                <li><a href="#">Unity</a></li>
+                <li><a href="#">Web</a></li>
+                <li><a href="#">モデリング</a></li>
+                <li><a href="#">メンター紹介</a></li>
+            </ul>
+        </nav>
+    </div>
+    <button type="button" onclick='menuBar()'>
+        <i class="fas fa-bars"></i>
+    </button>
+    <a href="#"><i class="far fa-arrow-alt-circle-up"></i></a>
+    <span class="page-cover" onclick="menuBar()"></span>
+
+     <!-- ////////////////// footer ////////////////// -->
+    <footer>
+        <div>
+            <a href="https://twitter.com/login?lang=ja" target="_blank"><i class="fab fa-twitter"></i>Twitter</a>
+            <a href="https://ja-jp.facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i>Facebook</a>
+        </div>
+    </footer>
+
+    <!-- ////////////////// javascript ////////////////// -->
+    <script src="https://kit.fontawesome.com/0ca1bb9859.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        //ページ内のリンク移動のスクロール処理
+        $(function(){
+        $('a[href^="#"]').click(function(){
+        var speed = 500;
+        var href= $(this).attr("href");
+        var target = $(href == "#" || href == "" ? 'html' : href);
+        var position = target.offset().top;
+        $("html, body").animate({scrollTop:position}, speed, "swing");
+        return false;
+        });
+        });
+
+        //menuBarの開閉
+        function menuBar(){
+            document.querySelector('body').classList.toggle('menuBar');
+        }
+    </script>
+</body>
+</html>
