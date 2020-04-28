@@ -433,11 +433,14 @@ footer div i {
     margin: 20px 0;
 }
 
-#artworkcreate main input {
+#artworkcreate main input,
+#artworkcreate main label,
+#artworkcreate main img {
     border: solid 1px #000000;
     width: 70vw;
     padding: 10px;
     box-sizing: border-box;
+    display: block;
 }
 
 #artworkcreate input[type="submit"] {
