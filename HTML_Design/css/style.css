@@ -401,19 +401,13 @@ footer div i {
 /* ~~~~~~~~~~~~~~~~~~ #artworkcreat ~~~~~~~~~~~~~~~~~~ */
 #artworkcreate main {
     display: grid;
-    grid-template-rows: calc(100vh - 100px);
     height: auto;
+    padding: 50px 0;
 }
 
 #artworkcreate main form {
-    /* display: grid; */
-    /* grid-template-columns: repeat(2, 1fr); */
     justify-self: center;
     align-self: center;
-}
-
-#artworkcreate main form > * {
-    /* grid-column: 1 / -1; */
 }
 
 #artworkcreate select {
@@ -424,29 +418,20 @@ footer div i {
     font-weight: bold;
 }
 
-/* #arrworkcreat select option {
-  
-} */
-
 #artworkcreate main form > div {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 
-#artworkcreate main form > div p {
+#artworkcreate main form > div div {
    height: 400px;
    padding: 20px;
    border: solid 1px rgba(0, 0, 0, 0.2);
 }
 
-
-
-
-
 #artworkcreate main form > p {
     margin: 20px 0;
 }
-
 
 #artworkcreate main input {
     border: solid 1px #000000;
@@ -462,10 +447,6 @@ footer div i {
     font-weight: bold;
     font-size: 20px;
     text-align: center;
-}
-
-#artworkcreate footer {
-
 }
 
 /* ~~~~~~~~~~~~~~~~~~ #user ~~~~~~~~~~~~~~~~~~ */
