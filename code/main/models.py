@@ -32,16 +32,17 @@ class Content(TimeStampedModel):
     creator = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="contents")
     # タイトル
-    title = models.CharField(max_length=64)
+    title = models.CharField('作品タイトル', max_length=64)
     # 説明
-    description = MarkdownxField(blank=True, null=True)
+    description = MarkdownxField('説明文', blank=True, null=True)
     # コンテンツのタイプ
     content_type = models.CharField(
+        'コンテンツの種類',
         choices=utils.CONTENT_TYPES, default=utils.SCRATCH, max_length=32)
     # 一覧で表示される画像
-    thumbnail = models.ImageField(upload_to=get_image_path)
+    thumbnail = models.ImageField('トップ画像', upload_to=get_image_path)
     # プロジェクトの各種サイトURL
-    url = models.URLField(blank=True, null=True, default="")
+    url = models.URLField('作品の掲載元のURL', blank=True, null=True, default="")
     embed_html = models.TextField(blank=True, null=False)
 
     def __str__(self):
