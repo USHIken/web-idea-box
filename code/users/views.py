@@ -3,11 +3,11 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 
 from main.models import Content
 from users.models import User
-from users.forms import LoginForm, SignUpForm
+from users.forms import LoginForm, SignUpForm, ProfileUpdateForm
 
 
 class Login(LoginView):
@@ -70,3 +70,16 @@ class ProfileView(ListView):
             return render(request, '404.html', context, status=404)
         else:
             return self.render_to_response(context)
+
+
+class ProfileUpdateView(UpdateView):
+    template_name = "users/update.html"
+    model = User
+    form_class = ProfileUpdateForm
+
+    def get_success_url(self):
+        return reverse_lazy(
+            "users:profile", kwargs={'pk': self.request.user.pk})
+
+    def get_object(self):
+        return User.objects.get(pk=self.request.user.pk)

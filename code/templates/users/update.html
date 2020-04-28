@@ -5,21 +5,29 @@
 
 {% block content %}
 <main>
-    <form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <label>
-            <img src="{{ content.creator.icon.url }}" alt="">
+            <img id="preview" src="{{ user.icon.url }}" alt="">
             <p>編集する</p>
-            <input type="file" name="image" style="display:none">
+            {{ form.icon }}
         </label>
-        <p><input type="text" name="username" placeholder="クリエイターネーム" required/></p>
-        <p><input type="password" name="pass" placeholder="パスワード" required/></p>
-        <p><textarea placeholder="自己紹介文"></textarea></p>
-        <p><input type="submit" value="登録する" /></p>
+        <p>{{ form.username }}</p>
+        <p>{{ form.profile }}</p>
+        <p><input type="submit" value="変更する" /></p>
     </form>
 </main>
 {% endblock %}
 
 {% block scripts %}
 {{ block.super }}
-
+<script>
+$('#id_icon').on('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#preview").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files[0]);
+});
+</script>
 {% endblock %}

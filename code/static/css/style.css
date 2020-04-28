@@ -376,25 +376,77 @@ footer div i {
     align-self: center;
 }
 
-#login main input {
+#login main p {
     margin: 20px 0;
-    border: solid 1px #000000;
-    width: 70vw;
-    padding: 10px;
-    box-sizing: border-box;
-    transition: width 1s;
 }
 
-.long input:last-of-type {
+#login main input {
+    border: solid 1px #000000;
+    width: 70vw;
+    box-sizing: border-box;
+}
+
+#login input:last-of-type {
     text-align: center;
 }
 
-input[type="submit"] {
+#login input[type="submit"] {
     background-color: #ec6c2b;
     border: none;
     color: #ffffff;
     font-weight: bold;
     font-size: 20px;
+}
+
+/* ~~~~~~~~~~~~~~~~~~ #artworkcreat ~~~~~~~~~~~~~~~~~~ */
+#artworkcreate main {
+    display: grid;
+    height: auto;
+    padding: 50px 0;
+}
+
+#artworkcreate main form {
+    justify-self: center;
+    align-self: center;
+}
+
+#artworkcreate select {
+    width: 70vw;
+    padding: 10px;
+    border: solid 1px #000000;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#artworkcreate main form > div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#artworkcreate main form > div div {
+   height: 400px;
+   padding: 20px;
+   border: solid 1px rgba(0, 0, 0, 0.2);
+}
+
+#artworkcreate main form > p {
+    margin: 20px 0;
+}
+
+#artworkcreate main input {
+    border: solid 1px #000000;
+    width: 70vw;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#artworkcreate input[type="submit"] {
+    background-color: #ec6c2b;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
 }
 
 /* ~~~~~~~~~~~~~~~~~~ #user ~~~~~~~~~~~~~~~~~~ */
@@ -413,8 +465,6 @@ input[type="submit"] {
     text-align: center;
     width: 100%;
     height: 100%;
-    border-bottom: dashed 1px #ffffff;
-    
     z-index: 25;
     position: relative;
 }
@@ -433,9 +483,14 @@ input[type="submit"] {
 #user header figure:last-of-type {
     grid-column: 1 / -1;
     grid-row: 1 / -1;
+    width: 100vw;
+    height: calc(100vh - 20px);
+    /* overflow: hidden; */
 }
 
 #user header figure:last-of-type img {
+    width: 100%;
+    object-fit: cover;
     vertical-align: bottom;
     filter: blur(6px);
 }
@@ -453,10 +508,9 @@ input[type="submit"] {
     grid-column: 1 / -1;
     grid-row: 2;
     justify-content: center;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.8);
     z-index: 100;
     position: relative;
-    
 }
 
 #user header > div  p{
