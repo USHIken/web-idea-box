@@ -32,7 +32,7 @@ class Signup(CreateView):
     """登録ページ"""
     form_class = SignUpForm
     template_name = 'users/login_and_registration.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('main:index')
 
     def form_valid(self, form):
         user = form.save()
