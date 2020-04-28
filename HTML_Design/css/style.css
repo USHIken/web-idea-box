@@ -66,6 +66,10 @@ main > div:nth-last-of-type(odd) {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
+main section {
+    display: grid;
+}
+
 main section > a {
     display: block;
 } 
@@ -158,8 +162,9 @@ main > div > section > div {
     display: flex;
     grid-column: 1 / -1;
     justify-self: center;
-    margin: 100px 0;
-    width: 500px;
+    padding: 100px 0;
+    width: 100%;
+    max-width: 500px;
     justify-content:space-around;
 } 
 
@@ -293,39 +298,74 @@ footer div i {
 }
 
 /* ~~~~~~~~~~~~~~~~~~ .artwork ~~~~~~~~~~~~~~~~~~ */
-.artwork {
-    /* min-height: 100vh; */
+.artwork article {
     display: grid;
     grid-template-columns: 1fr 10fr 1fr;
 }
 
-.artwork > * {
+.artwork  article > * {
     grid-column: 2;
 }
 
-.artwork h3 {
-    justify-self: center;
-    align-self: center;
-    margin: 30px 0;
+.artwork article h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    margin: 0;
     font-size: 20px;
     text-shadow: 0 0 1px #000000;
 }
 
-.artwork > div {
+.artwork article > div {
     background-color: transparent;
 }
 
-.artwork p {
-    margin: 50px 0;
+.artwork article > p {
+    margin: 20px 0;
 }
 
-.artwork figure {
-    height: 49vw;
+main article h3 + figure {
+    margin: 0;
 }
 
-.artwork iframe ,img {
+main article > figure {
+    height: 50vw;
+    margin: 20px 0;
+}
+
+main article > figure img {
     height: 100%;
+    object-fit: cover;
+}
+
+.artwork article iframe ,img {
+    height: 100%;
+    /* object-fit: cover; */
     vertical-align: bottom;
+}
+
+main > article > div:last-of-type {
+    display: flex;
+    grid-column: 1 / -1;
+    justify-self: center;
+    padding: 100px 0;
+    width: 100%;
+    max-width: 500px;
+    justify-content:space-around;
+} 
+
+main > article > div:last-of-type p {
+    font-size: 12px;
+    margin: 0;
+}
+
+main > article > div:last-of-type a {
+    color: #ffffff;
+    padding: 15px 40px;
+    border-radius: 10px;
+    background-color: #ec6c2b;
 }
 
 /* ~~~~~~~~~~~~~~~~~~ .login ~~~~~~~~~~~~~~~~~~ */
@@ -346,6 +386,7 @@ footer div i {
     width: 70vw;
     padding: 10px;
     box-sizing: border-box;
+    transition: width 1s;
 }
 
 .long input:last-of-type {
@@ -446,14 +487,32 @@ input[type="submit"] {
     /* ================== footer ================== */
 
     /* ~~~~~~~~~~~~~~~~~~ .artwork ~~~~~~~~~~~~~~~~~~ */
+    main article h3 + figure {
+        margin: 0;
+    }
+
+    main article > figure {
+        height: 50vw;
+        margin: 40px 0;
+    }
+    
+    main article > figure img {
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .artwork article > p {
+        margin: 40px 0;
+        line-height: 28px;
+    }
 
     /* ~~~~~~~~~~~~~~~~~~ .login ~~~~~~~~~~~~~~~~~~ */
     .login input {
         margin: 20px 0;
         width: 40vw;
         padding: 10px;
+        transition: width 1s;
     }
-
 }
 
 /* ////////////////// Personal Computer 基本設定 ////////////////// */
@@ -550,12 +609,31 @@ input[type="submit"] {
     /* ================== footer ================== */
 
     /* ~~~~~~~~~~~~~~~~~~ .artwork ~~~~~~~~~~~~~~~~~~ */
+    main article h3 + figure {
+        margin: 0;
+    }
+    
+    main article > figure {
+        height: 40vw;
+        margin: 40px 0;
+    }
+    
+    main article > figure img {
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .artwork article > p {
+        font-size: 18px;
+        margin: 40px 0;
+        line-height: 30px;
+    }
 
     /* ~~~~~~~~~~~~~~~~~~ .login ~~~~~~~~~~~~~~~~~~ */
     .login input {
         margin: 20px 0;
         width: 30vw;
         padding: 10px;
+        transition: width 1s;
     }
-
 }
