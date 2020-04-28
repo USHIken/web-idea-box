@@ -482,16 +482,16 @@ input[type="submit"] {
     /* ================== footer ================== */
 
     /* ~~~~~~~~~~~~~~~~~~ .artwork ~~~~~~~~~~~~~~~~~~ */
-    main article h3 + figure {
+    .artwork main article h3 + figure {
         margin: 0;
     }
 
-    main article > figure {
+    .artwork main article > figure {
         height: 50vw;
         margin: 40px 0;
     }
     
-    main article > figure img {
+    .artwork main article > figure img {
         height: 100%;
         object-fit: cover;
     }
