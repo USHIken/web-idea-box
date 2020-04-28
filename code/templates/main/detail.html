@@ -5,26 +5,37 @@
 {% block content %}
 
 <main class="artwork">
-    <h3>{{ content.title }}</h3>
-    <figure>
-        {% if content.is_embed_type %}
-        {{content.embed_html|safe}}
-        {% endif %}
-        {% if not content.is_embed_type and content.thumbnail %}
-        <img src="{{content.thumbnail.url}}" alt="作品サムネイル">
-        {% endif %}
-    </figure>
-    <p>{{content.description|markdown_to_html_with_escape}}</p>
+    <article>
+        <h3>{{ content.title }}</h3>
+        <figure>
+            {% if content.is_embed_type %}
+            {{ content.embed_html|safe }}
+            {% endif %}
+            {% if not content.is_embed_type and content.thumbnail %}
+            <img src="{{ content.thumbnail.url }}" alt="作品サムネイル">
+            {% endif %}
+        </figure>
+
+        <div>
+            <img src="{% static 'img/person.jpg' %}" alt="">
+            <p>{{ content.creator.username }}</p>
+            <time datetime="{{ content.created_at|date:'Y-m-d' }}">{{ content.created_at|date:"Y/m/d" }}</time>
+        </div>
+
+        <p>{{ content.description|markdown_to_html_with_escape }}</p>
+
+        <div>
+            {% if is_creator %}
+            <p><a href="{% url 'main:update' content.pk %}">編集する</a></p>
+        
+            <form action="{% url 'main:delete' content.pk %}" method="post" onsubmit="return confirm_cancel('{{ content.title }}を削除しますか？')" name="form_delete">
+                {% csrf_token %}
+                <p><a href="javascript:form_delete.submit()">削除する</a></p>
+            </form>
+            {% endif %}
+        </div>
+    </article>
 </main>
-
-{% if is_creator %}
-<a href="{% url 'main:update' content.pk %}">編集</a>
-
-<form action="{% url 'main:delete' content.pk %}" method="post" onsubmit="return confirm_cancel('{{content.title}}を削除しますか？')">
-    {% csrf_token %}
-    <input type="submit" value="削除">
-</form>
-{% endif %}
 
 {% endblock %}
 
