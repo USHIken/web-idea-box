@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
+{% block body_id %}login{% endblock %}
 
-<main class="login">
+{% block content %}
+<main>
     <form method="post">
         {% csrf_token %}
         <p>{{form.username}}</p>
@@ -29,5 +30,4 @@
     {% endfor %}
     </div> -->
 </main>
-
 {% endblock %}

@@ -2,9 +2,10 @@
 {% load static %}
 {% load filter %}
 
-{% block content %}
+{% block body_id %}artwork{% endblock %}
 
-<main class="artwork">
+{% block content %}
+<main>
     <article>
         <h3>{{ content.title }}</h3>
         <figure>
@@ -22,7 +23,7 @@
             <time datetime="{{ content.created_at|date:'Y-m-d' }}">{{ content.created_at|date:"Y/m/d" }}</time>
         </div>
 
-        <p>{{ content.description|markdown_to_html_with_escape }}</p>
+        <div>{{ content.description|markdown_to_html_with_escape }}</div>
 
         <div>
             {% if is_creator %}
@@ -36,7 +37,6 @@
         </div>
     </article>
 </main>
-
 {% endblock %}
 
 {% block scripts %}
