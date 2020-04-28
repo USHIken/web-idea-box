@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body_id %}user-update{% endblock %}
+
+{% block content %}
+<main>
+    <form>
+        <label>
+            <img src="{% static 'img/person.jpg' %}" alt="">
+            <p>編集する</p>
+            <input type="file" name="image" style="display:none">
+        </label>
+        <p><input type="text" name="username" placeholder="クリエイターネーム" required/></p>
+        <p><input type="password" name="pass" placeholder="パスワード" required/></p>
+        <p><textarea placeholder="自己紹介文"></textarea></p>
+        <p><input type="submit" value="登録する" /></p>
+    </form>
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+
+{% endblock %}
