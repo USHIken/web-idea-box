@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body_id %}user{% endblock %}
+
+{% block header %}
+<header>
+    <figure>
+        <div>
+            <img src="{% static 'img/person.jpg' %}" alt="">
+            <p>{{ creator.username }}</p>
+        </div>
+    </figure>
+    <figure>
+        <img src="../img/modeling.jpg" alt="">
+    </figure>
+    <div>
+        <p>小学５年生の時に初めてScratchでプログラミングに触れました！最近Unityで作品を作り始めたばかりですが、半年以内にAppストアに作品をひとつ出したいと思っています！でたらまたアナウンスするのでぜひ遊んでください！</p>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div>
+        <section>
+            <h2>{{ creator.username }}<span>の</span>作品集</h2>
+            {% for content in object_list %}
+            {% include 'main/content_card.html' %}
+            {% endfor %}
+
+            <div>
+                {% include 'main/paginator.html' %}
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+
+{% endblock %}
