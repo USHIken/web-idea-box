@@ -1,31 +1,52 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block body_id %}artworkcreate{% endblock %}
+
 {% block content %}
 {% url 'main:create' as create_url %}
-
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    {% if request.path !=  create_url %}
-    <p>{{object.content_type}}</p>
-    {% endif %}
-
-    {{ form.as_p }}
-
-    {% if request.path ==  create_url %}
-    <input type="submit" value="投稿">
-    {% else %}
-    <input type="submit" value="更新">
-    {% endif %}
-
-</form>
+<main>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    
+        {% if request.path !=  create_url %}
+        <p>コンテンツの種類: {{object.content_type}}</p>
+        {% else %}
+        {{ form.content_type }}
+        {% endif %}
+    
+        <p>{{ form.title }}</p>
+        <p>
+            <label for="{{ form.thumbnail.id_for_label }}">
+                {{ form.thumbnail.label }}を選択
+                {{ form.thumbnail }}
+            </label>
+            <img id="preview" src="{{ object.thumbnail.url }}" alt="">
+        </p>
+        <p>{{ form.url }}</p>
+    
+        {{ form.description }}
+        {% if request.path ==  create_url %}
+        <input type="submit" value="投稿する">
+        {% else %}
+        <input type="submit" value="更新する">
+        {% endif %}
+    </form>
+</main>
 {{form.errors}}
-{{form.media}}
 
 {% endblock %}
 
 {% block scripts %}
 {{ block.super }}
-
+{{ form.media }}
+<script>
+$('#{{ form.thumbnail.id_for_label }}').on('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $("#preview").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files[0]);
+});
+</script>
 {% endblock %}
