@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-/* @font-face {
-    font-family: 'HackGen35Console-Regular-forPowerline';
-    src: url(../font/HackGen35Console-Regular-forPowerline.ttf);
-} */
-
 /* ////////////////// 全デバイスの基本設定 ////////////////// */
 * {
     padding: 0;
@@ -125,7 +120,7 @@ main article > div time {
 }
 
 main article > figure img {
-    height: 50vw;
+    height: 60vw;
     object-fit: cover;
     vertical-align: bottom;
 }
@@ -326,16 +321,16 @@ footer div i {
     margin: 20px 0;
 }
 
-main article h3 + figure {
+.artwork main article h3 + figure {
     margin: 0;
 }
 
-main article > figure {
+.artwork main article > figure {
     height: 50vw;
     margin: 20px 0;
 }
 
-main article > figure img {
+.artwork main article > figure img {
     height: 100%;
     object-fit: cover;
 }
@@ -346,7 +341,7 @@ main article > figure img {
     vertical-align: bottom;
 }
 
-main > article > div:last-of-type {
+.artwork main > article > div:last-of-type {
     display: flex;
     grid-column: 1 / -1;
     justify-self: center;
@@ -356,12 +351,12 @@ main > article > div:last-of-type {
     justify-content:space-around;
 } 
 
-main > article > div:last-of-type p {
+.artwork main > article > div:last-of-type p {
     font-size: 12px;
     margin: 0;
 }
 
-main > article > div:last-of-type a {
+.artwork main > article > div:last-of-type a {
     color: #ffffff;
     padding: 15px 40px;
     border-radius: 10px;
@@ -487,16 +482,16 @@ input[type="submit"] {
     /* ================== footer ================== */
 
     /* ~~~~~~~~~~~~~~~~~~ .artwork ~~~~~~~~~~~~~~~~~~ */
-    main article h3 + figure {
+    .artwork main article h3 + figure {
         margin: 0;
     }
 
-    main article > figure {
+    .artwork main article > figure {
         height: 50vw;
         margin: 40px 0;
     }
     
-    main article > figure img {
+    .artwork main article > figure img {
         height: 100%;
         object-fit: cover;
     }
@@ -557,6 +552,10 @@ input[type="submit"] {
         font-size: 22px;
     }
 
+    /* main article > figure {
+        height: 12.5vw;
+    } */
+
     main article > figure img {
         height: 12.5vw;
     }
@@ -609,21 +608,21 @@ input[type="submit"] {
     /* ================== footer ================== */
 
     /* ~~~~~~~~~~~~~~~~~~ .artwork ~~~~~~~~~~~~~~~~~~ */
-    main article h3 + figure {
+    .artwork main article h3 + figure {
         margin: 0;
     }
     
-    main article > figure {
+    .artwork main article > figure {
         height: 40vw;
         margin: 40px 0;
     }
     
-    main article > figure img {
+    .artwork main article > figure img {
         height: 100%;
         object-fit: cover;
     }
 
-    .artwork article > p {
+    .artwork .artwork article > p {
         font-size: 18px;
         margin: 40px 0;
         line-height: 30px;
