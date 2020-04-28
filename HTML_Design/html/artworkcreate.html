@@ -6,13 +6,26 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body id="login">
+<body id="artworkcreate">
     <!-- ////////////////// main ////////////////// -->
-    <main class="login">
+    <main>
         <form>
-            <p><input type="text" name="username" placeholder="User ID" required/></p>
-            <p><input type="password" name="pass" placeholder="Password" required/></p>
-            <p><input type="submit" value="ログイン" /></p>
+            <select>
+                <option value="">Scratch</option>
+                <option value="">Unity</option>
+                <option value="">Web</option>
+                <option value="">3Dモデリング</option>
+                <option value="">2Dアート</option>
+                <option value="">その他</option>
+            </select>
+            <p><input type="text" name="username" placeholder="作品タイトル" required/></p>
+            <p><input type="text" name="username" placeholder="トップ画像" required/></p>
+            <p><input type="text" name="username" placeholder="作品の掲載元のURL" required/></p>
+            <div>
+                <div>入力</div>
+                <div>出力</div>
+            </div>
+            <p><input type="submit" value="投稿する" /></p>
         </form>
     </main>
 

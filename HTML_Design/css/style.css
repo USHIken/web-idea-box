@@ -460,7 +460,7 @@ footer div i {
     display: flex;
     justify-content: center;
     align-items: center;
-    grid-column: 2 / -2;
+    grid-column: 1 / -1;
     grid-row: 1;
     text-align: center;
     width: 100%;
@@ -483,9 +483,8 @@ footer div i {
 #user header figure:last-of-type {
     grid-column: 1 / -1;
     grid-row: 1 / -1;
-    width: 100vw;
+    width: 100%;
     height: calc(100vh - 20px);
-    /* overflow: hidden; */
 }
 
 #user header figure:last-of-type img {
