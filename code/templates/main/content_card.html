@@ -6,7 +6,7 @@
             <img src="{{ content.thumbnail.url }}" alt="">
         </figure>
         <div>
-            <img src="{% static 'img/person.jpg' %}" alt="">
+            <img src="{{ content.creator.icon.url }}" alt="">
             <p>{{ content.creator.username }}</p>
             <time datetime="{{ content.created_at|date:'Y-m-d' }}">{{ content.created_at|date:"Y/m/d" }}</time>
         </div>

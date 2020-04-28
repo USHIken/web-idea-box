@@ -7,7 +7,7 @@
 <main>
     <form>
         <label>
-            <img src="{% static 'img/person.jpg' %}" alt="">
+            <img src="{{ content.creator.icon.url }}" alt="">
             <p>編集する</p>
             <input type="file" name="image" style="display:none">
         </label>

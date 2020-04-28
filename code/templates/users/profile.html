@@ -7,12 +7,12 @@
 <header>
     <figure>
         <div>
-            <img src="{% static 'img/person.jpg' %}" alt="">
+            <img src="{{ creator.icon.url }}" alt="">
             <p>{{ creator.username }}</p>
         </div>
     </figure>
     <figure>
-        <img src="../img/modeling.jpg" alt="">
+        <img src="{% static 'img/modeling.jpg' %}" alt="">
     </figure>
     <div>
         <p>小学５年生の時に初めてScratchでプログラミングに触れました！最近Unityで作品を作り始めたばかりですが、半年以内にAppストアに作品をひとつ出したいと思っています！でたらまたアナウンスするのでぜひ遊んでください！</p>
