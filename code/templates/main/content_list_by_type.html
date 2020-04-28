@@ -12,12 +12,7 @@
             {% endfor %}
 
             <div>
-                {% if page_obj.has_previous %}
-                <p><a href="?page={{ page_obj.previous_page_number }}">前のページ</a></p>
-                {% endif %}
-                {% if page_obj.has_next %}
-                <p><a href="?page={{ page_obj.next_page_number }}">次のページ</a></p>
-                {% endif %}
+                {% include 'main/paginator.html' %}
             </div>
         </section>
     </div>
