@@ -22,7 +22,7 @@
 {% block scripts %}
 {{ block.super }}
 <script>
-$('#id_icon').on('change', function (e) {
+$('#{{ form.icon.id_for_label }}').on('change', function (e) {
     var reader = new FileReader();
     reader.onload = function (e) {
         $("#preview").attr('src', e.target.result);
