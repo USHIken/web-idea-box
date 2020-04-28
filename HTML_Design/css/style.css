@@ -327,6 +327,7 @@ footer div i {
 
 .artwork main article > figure {
     height: 50vw;
+    width: 100%;
     margin: 20px 0;
 }
 
@@ -337,7 +338,7 @@ footer div i {
 
 .artwork article iframe ,img {
     height: 100%;
-    /* object-fit: cover; */
+    object-fit: cover;
     vertical-align: bottom;
 }
 
