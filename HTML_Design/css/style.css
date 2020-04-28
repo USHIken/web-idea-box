@@ -327,6 +327,7 @@ footer div i {
 
 .artwork main article > figure {
     height: 50vw;
+    width: 100%;
     margin: 20px 0;
 }
 
@@ -337,7 +338,7 @@ footer div i {
 
 .artwork article iframe ,img {
     height: 100%;
-    /* object-fit: cover; */
+    object-fit: cover;
     vertical-align: bottom;
 }
 
@@ -463,6 +464,80 @@ input[type="submit"] {
     margin-top: 40px;
     font-weight: bold;
 }
+
+/* ~~~~~~~~~~~~~~~~~~ .user ~~~~~~~~~~~~~~~~~~ */
+#userupdate {
+    min-height: minmax(calc(100vh - 100px));
+}
+
+#userupdate main {
+    display: grid;
+}
+
+#userupdate main form {
+    margin-top: 40px;
+}
+
+#userupdate main form, figure {
+    justify-self: center;
+    align-self: center;
+}
+
+#userupdate main img {
+    width: 40vw;
+    height: 40vw;
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#userupdate p {
+    margin: 20px 0;
+}
+
+#userupdate main label {
+    display: block;
+    width: 70vw;
+    text-align: center;
+    position: relative;
+}
+
+#userupdate main label p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-40%);
+    font-size: 20px;
+    color: #ffffff;
+    text-shadow: 0 0 2px #000000;
+}
+
+#userupdate main input {
+    border: solid 1px #000000;
+    width: 70vw;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#userupdate textarea {
+    border: solid 1px #000000;
+    width: 100%;
+    height: 50vw;
+    padding: 10px;
+    font-size: 12px;
+}
+
+#userupdate main input[type="submit"] {
+    background-color: #ec6c2b;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
 
 /* ////////////////// Tablet 基本設定 ////////////////// */
 @media (min-width: 700px) and (max-width:1199px) {
