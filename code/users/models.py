@@ -44,7 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         },
     )
     profile = models.TextField(
-        '自己紹介文', max_length=140, blank=True, null=True)
+        '自己紹介文', max_length=140, blank=True, null=True, default="")
     icon = models.ImageField(
         'アイコン', blank=True, null=False,
         upload_to=get_image_path, default=random_icon_path)
