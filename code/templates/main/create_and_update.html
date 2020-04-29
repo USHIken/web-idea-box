@@ -8,13 +8,14 @@
 <main>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-    
-        {% if request.path !=  create_url %}
-        <p>コンテンツの種類: {{object.content_type}}</p>
+
+        {% if request.path != create_url %}
+        <p>コンテンツの種類: {{ object.content_type }}</p>
         {% else %}
         {{ form.content_type }}
+        {{ form.content_type.errors }}
         {% endif %}
-    
+
         <p>{{ form.title }}</p>
         <p>
             <label for="{{ form.thumbnail.id_for_label }}">
@@ -22,18 +23,20 @@
                 {{ form.thumbnail }}
             </label>
             <img id="preview" src="{{ object.thumbnail.url }}" alt="">
+            {{ form.thumbnail.errors }}
         </p>
         <p>{{ form.url }}</p>
-    
+        <p>{{ form.url.errors }}</p>
+
         {{ form.description }}
-        {% if request.path ==  create_url %}
+        {{ form.description.errors }}
+        {% if request.path == create_url %}
         <input type="submit" value="投稿する">
         {% else %}
         <input type="submit" value="更新する">
         {% endif %}
     </form>
 </main>
-{{form.errors}}
 
 {% endblock %}
 
@@ -48,5 +51,6 @@ $('#{{ form.thumbnail.id_for_label }}').on('change', function (e) {
     }
     reader.readAsDataURL(e.target.files[0]);
 });
+$('input[name="thumbnail"]').removeAttr('required max min maxlength pattern');
 </script>
 {% endblock %}
