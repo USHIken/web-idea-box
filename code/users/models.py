@@ -4,6 +4,8 @@ import random
 import uuid
 
 from django.db import models
+from django.db.models.signals import pre_save, post_delete
+from django.dispatch import receiver
 from django.conf import settings
 from django.contrib.auth.models import (
     AbstractBaseUser, PermissionsMixin, UserManager
@@ -76,3 +78,35 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
+
+
+def is_default_icon(icon: models.ImageField):
+    return "default_icons" in icon.path
+
+
+@receiver(post_delete, sender=User)
+def auto_remove_image_file_post_delete(sender, instance, *args, **kwargs):
+    """ユーザー削除時に画像削除"""
+    if not is_default_icon(instance.icon):
+        if os.path.isfile(instance.icon.path):
+            os.remove(instance.icon.path)
+
+
+@receiver(pre_save, sender=User)
+def auto_remove_image_on_change(sender, instance, **kwargs):
+    """画像変更時に元画像削除"""
+    if not instance.pk:
+        return False
+
+    try:
+        old_file = User.objects.get(pk=instance.pk).icon
+    except User.DoesNotExist:
+        return False
+
+    if not bool(old_file):
+        return False
+
+    new_file = instance.icon
+    if not old_file == new_file:
+        if os.path.isfile(old_file.path) and not is_default_icon(old_file):
+            os.remove(old_file.path)
