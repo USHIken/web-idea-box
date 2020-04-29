@@ -11,9 +11,12 @@
             <img id="preview" src="{{ user.icon.url }}" alt="">
             <p>編集する</p>
             {{ form.icon }}
+            {{ form.icon.errors }}
         </label>
         <p>{{ form.username }}</p>
+        <p>{{ form.username.errors }}</p>
         <p>{{ form.profile }}</p>
+        <p>{{ form.profile.errors }}</p>
         <p><input type="submit" value="変更する" /></p>
     </form>
 </main>

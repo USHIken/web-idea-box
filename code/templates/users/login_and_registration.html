@@ -7,18 +7,22 @@
 <main>
     <form method="post">
         {% csrf_token %}
-        <p>{{form.username}}</p>
+        <p>{{ form.username }}</p>
+        <p>{{ form.username.errors }}</p>
         
         {% url 'users:login' as login_url %}
         {% if request.path == login_url %}
 
-        <p>{{form.password}}</p>
+        <p>{{ form.password }}</p>
+        <p>{{ form.password.errors }}</p>
         <p><input type="submit" value="ログイン"/></p>
 
         {% else %}
         
-        <p>{{form.password1}}</p>
-        <p>{{form.password2}}</p>
+        <p>{{ form.password1 }}</p>
+        <p>{{ form.password1.errors }}</p>
+        <p>{{ form.password2 }}</p>
+        <p>{{ form.password2.errors }}</p>
 
         <p><input type="submit" value="とうろく"/></p>
 
