@@ -8,8 +8,8 @@ from django.views.generic import (
 )
 
 from main.forms import ContentCreateForm, ContentUpdateForm
-from main.models import Content
-from main.utils import CONTENT_TYPES
+from main.models import Content, ContentVisit
+from main.utils import CONTENT_TYPES, get_client_ip
 
 
 class ContentListView(ListView):
@@ -72,6 +72,24 @@ class ContentDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["is_creator"] = self.object.is_created_by(self.request.user)
         return context
+
+    def get(self, request, *args, **kwargs):
+        self.create_content_visit()
+        return super().get(request, *args, **kwargs)
+
+    def create_content_visit(self):
+        """コンテンツの訪問履歴を残す"""
+        request = self.request
+        # 訪問者がログインしていなければNone
+        visitor = request.user if request.user.is_authenticated else None
+
+        ContentVisit.objects.create(
+            content=self.get_object(),
+            visitor=visitor,
+            remote_addr=get_client_ip(request),
+            user_agent=request.META.get("HTTP_USER_AGENT"),
+            request_method=request.META.get("REQUEST_METHOD"),
+        )
 
 
 class ContentUpdateView(LoginRequiredMixin, UpdateView):

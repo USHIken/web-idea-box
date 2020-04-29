@@ -2,6 +2,7 @@ import os
 import uuid
 
 from django.db import models
+from django.db.models import Q
 from django.db.models.signals import pre_save, post_delete
 from django.dispatch import receiver
 
@@ -43,6 +44,7 @@ class Content(TimeStampedModel):
     thumbnail = models.ImageField('トップ画像', upload_to=get_image_path)
     # プロジェクトの各種サイトURL
     url = models.URLField('作品の掲載元のURL', blank=True, null=True, default="")
+    # 埋め込み用HTML: receiverによる自動入力
     embed_html = models.TextField(blank=True, null=False)
 
     def __str__(self):
@@ -56,6 +58,42 @@ class Content(TimeStampedModel):
     def is_created_by(self, user):
         """コンテンツ投稿者であるかどうか"""
         return self.creator == user
+
+    # 訪問履歴取得関数群
+    def get_visits_other_than_creator(self):
+        """コンテンツ投稿者以外の訪問履歴を取得"""
+        return self.visits.filter(~Q(visitor=self.creator))
+
+    def get_visits_only_logged_in_user(self):
+        """ログインユーザーのみの訪問履歴を取得"""
+        return self.visits.filter(~Q(visitor=None))
+
+
+class ContentVisit(TimeStampedModel):
+    """作品への訪問"""
+    # 訪問された作品
+    content = models.ForeignKey(
+        Content, on_delete=models.CASCADE, related_name="visits")
+    # 訪問したユーザー(ログインしていなければAnonymousUser)
+    visitor = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="visits",
+        blank=True, null=True, default=None)
+    # 接続元IPアドレス
+    remote_addr = models.GenericIPAddressField('接続元IPアドレス')
+    # 接続元UserAgent
+    user_agent = models.TextField('接続元UserAgent')
+    # リクエストHTTPメソッド
+    request_method = models.CharField('HTTPメソッド', max_length=10)
+
+    def __str__(self):
+        title = self.content.title
+        visitor = self.visitor
+        if visitor:
+            visitor_name = visitor.username
+        else:
+            visitor_name = "AnonymousUser"
+        date = self.created_at.strftime(r"%Y/%m/%d %H:%M:%S")
+        return f'[{date}] "{title}" - {visitor_name}'
 
 
 # class Favorite(TimeStampedModel):
