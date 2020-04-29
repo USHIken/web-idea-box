@@ -1,5 +1,9 @@
 {% load static %}
+{% if content.content_type == 'web' %}
+<a href="{{ content.url|safe }}">
+{% else %}
 <a href="{% url 'main:detail' content.pk %}">
+{% endif %}
     <article>
         <h3>{{ content.title }}</h3>
         <figure>
