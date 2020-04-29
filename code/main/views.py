@@ -19,12 +19,16 @@ class ContentListView(ListView):
 
     def get_context_data(self):
         context = super().get_context_data()
+        # コンテンツ種類別の最近の投稿6件
         content_list_by_type = {}
         for content_type, _ in CONTENT_TYPES:
             queryset = self.model.objects.filter(content_type=content_type)
+            queryset = queryset.order_by('-created_at')
             content_list_by_type[content_type] = queryset[:6]
         context["content_list_by_type"] = content_list_by_type
-        context["recent_contents"] = self.model.objects.all()[:6]
+        # 最近の投稿6件
+        recent_contents = self.model.objects.order_by('-created_at')[:6]
+        context["recent_contents"] = recent_contents
         return context
 
 
