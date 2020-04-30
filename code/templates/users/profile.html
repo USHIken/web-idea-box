@@ -33,8 +33,28 @@
                 {% include 'main/paginator.html' %}
             </div>
         </section>
-    </div>
+    </div>    
 </main>
+
+<button type="button" onclick='userInfo()' class="userInfoOpen">
+    <i class="fas fa-cogs"></i>
+</button>
+
+<div class="pop">
+    <div>
+        <p><a href="#">パスワードを変更</a></p>
+        <p><a href="#">プロフィールを変更</a></p>
+        <!-- <button type="button" onclick=''><i class="fas fa-times-circle"></i></button> -->
+        <button type="button" onclick=''><img src="{% static 'img/times-circle-solid.svg' %}" alt=""></button>
+    </div>
+</div>
+
+<script>
+    //userInfoの表示非表示
+    function userInfo(){
+        document.querySelector('body').classList.toggle('userInfo');
+    }
+</script>
 {% endblock %}
 
 {% block scripts %}

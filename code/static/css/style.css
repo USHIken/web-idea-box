@@ -527,6 +527,7 @@ footer div i {
     display: grid;
     grid-template-columns: 50px 1fr 50px;
     grid-template-rows: repeat(2, 50vh);
+    grid-row: 1;
 }
 
 #user header figure:first-of-type {
@@ -585,10 +586,84 @@ footer div i {
     position: relative;
 }
 
-#user header > div  p{
+#user header > div p {
     width: 80%;
     margin-top: 40px;
     font-weight: bold;
+}
+
+#user main > p {
+    top: 0;
+    right: 0;
+    margin-top: 20px;
+    margin-right: 20px;
+    z-index: 100;
+    position: absolute;
+}
+
+#user main > p a {
+    color: #ffffff;
+}
+
+#user main > p i {
+    display: block;
+    text-shadow: 0 0 1px #000000;
+    font-size: 30px;
+}
+
+#user .pop {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    justify-self: center;
+    align-self: center;
+    width: 80vw;
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.99);
+
+    z-index: 100;
+}
+
+#user .pop div {
+    display: grid;
+    align-self: center;
+    grid-gap: 20px;
+    row-gap: 20px;
+    height: 50%;
+}
+
+#user .userInfoOpen {
+    top: 10px;
+    left: auto;
+    right: 10px;
+    position: absolute;
+}
+
+#user .pop {
+    display: none;
+}
+
+#user.userInfo .pop {
+    display: block;
+}
+
+#user .pop div button {
+    justify-self: center;
+    top: auto;
+    left: auto;
+    color: #000000;
+    font-size: 20px;
+    height: 50px;
+    width: 80%;
+    margin: auto;
+    font-weight: bold;
+    text-shadow: none;
+    border: solid 1px #000000;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: none;
+    z-index: 100;
+    position: relative;
 }
 
 /* ~~~~~~~~~~~~~~~~~~ #user ~~~~~~~~~~~~~~~~~~ */
