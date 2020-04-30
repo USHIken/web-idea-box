@@ -20,6 +20,7 @@
     <div id="nav">
         <nav>
             <ul>
+                <li><a href="{% url 'main:index' %}">トップページ</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'main:create' %}">とうこう</a></li>
                 <li><a href="{% url 'users:logout' %}">ログアウト</a></li>
@@ -28,7 +29,6 @@
                 <li><a href="{% url 'users:login' %}">ログイン</a></li>
                 <li><a href="{% url 'users:signup' %}">アカウント作成</a></li>
                 {% endif %}
-                <li><a href="{% url 'main:index' %}">トップページ</a></li>
                 <li><a href="{% url 'main:list_by_type' 'scratch' %}">Scratch</a></li>
                 <li><a href="{% url 'main:list_by_type' 'unity' %}">Unity</a></li>
                 <li><a href="{% url 'main:list_by_type' 'web' %}">Web</a></li>
