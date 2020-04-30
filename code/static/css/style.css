@@ -136,7 +136,7 @@ main section > a:last-of-type {
 
 main article > div {
     display: flex;
-    margin: 20px;
+    margin: 20px 0;
 }
 
 main article > div img {
@@ -150,8 +150,11 @@ main article > div p {
     color: #000000;
     font-size: 15px;
     font-weight: bold;
-    margin-left: 20px;
     align-self: center;
+}
+
+main article > div img + p {
+    margin-left: 20px;
 }
 
 main article > div time {
@@ -347,8 +350,8 @@ footer div i {
     
 }
 
-#artwork  article > * {
-    grid-column: 2;
+#artwork article > * {
+    grid-column: 2 / -2;
 }
 
 #artwork article h3 {
@@ -370,24 +373,21 @@ footer div i {
     margin: 20px 0;
 }
 
-#artwork main article h3 + figure {
-    margin: 0;
-}
-
-#artwork main article > figure {
+#artwork main article figure {
+    grid-column: 2 / -2;
     height: 50vw;
     width: 100%;
-    margin: 20px 0;
+    /* margin: 20px 0; */
 }
 
 #artwork main article > figure img {
     height: 100%;
     object-fit: cover;
+    vertical-align: bottom;
 }
 
-#artwork article iframe ,img {
+#artwork article > figure iframe {
     height: 100%;
-    object-fit: cover;
     vertical-align: bottom;
 }
 
@@ -413,7 +413,6 @@ footer div i {
     top: auto;
     left: auto;
     position: relative;
-    /* -webkit-appearance: none; */
 }
 
 #artwork main > article > div:last-of-type button[type='submit']{
@@ -426,19 +425,11 @@ footer div i {
     -webkit-appearance: none;
 }
 
-
-/* #artwork main > article > div:last-of-type button[type='submit'] a {
-    padding: 0;
-    -webkit-appearance: none;
-} */
-
 #artwork main > article > div:last-of-type a {
     color: #ffffff;
     padding: 15px 40px;
     border-radius: 10px;
     background-color: #ec6c2b;
-    /* -webkit-appearance: none; */
-    
 }
 
 /* ~~~~~~~~~~~~~~~~~~ #login main ~~~~~~~~~~~~~~~~~~ */
