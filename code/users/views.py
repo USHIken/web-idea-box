@@ -1,5 +1,5 @@
 from django.contrib.auth import login
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -7,7 +7,10 @@ from django.views.generic import CreateView, ListView, UpdateView
 
 from main.models import Content
 from users.models import User
-from users.forms import LoginForm, SignUpForm, ProfileUpdateForm
+from users.forms import (
+    LoginForm, SignUpForm, ProfileUpdateForm,
+    UserPasswordChangeForm,
+)
 
 
 class Login(LoginView):
@@ -83,3 +86,12 @@ class ProfileUpdateView(UpdateView):
 
     def get_object(self):
         return User.objects.get(pk=self.request.user.pk)
+
+
+class UserPasswordChangeView(PasswordChangeView):
+    template_name = "users/password_change.html"
+    form_class = UserPasswordChangeForm
+
+    def get_success_url(self):
+        user = self.request.user
+        return reverse_lazy('users:profile', kwargs={'pk': user.pk})
