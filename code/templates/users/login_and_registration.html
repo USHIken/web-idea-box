@@ -7,6 +7,7 @@
 <main>
     <form method="post">
         {% csrf_token %}
+        <p>{{ form.non_field_errors }}</p>
         <p>{{ form.username }}</p>
         <p>{{ form.username.errors }}</p>
         
