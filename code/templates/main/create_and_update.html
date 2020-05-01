@@ -6,7 +6,7 @@
 {% block content %}
 {% url 'main:create' as create_url %}
 <main>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" name="form">
         {% csrf_token %}
 
         {% if request.path != create_url %}
@@ -51,6 +51,22 @@ $('#{{ form.thumbnail.id_for_label }}').on('change', function (e) {
     }
     reader.readAsDataURL(e.target.files[0]);
 });
+
+{% comment %}
+// select変更時にrequiredを付け外しする
+$('select').on("change load" ,function(e){
+    var val = $(this).val();
+    var embed_types = new Array("scratch", "unity", "web", "artwork3d")
+    var url_input = $('input[name="url"]')
+    if (embed_types.includes(val)) {
+        console.log(val);
+        url_input.attr('required', true);
+    } else {
+        url_input.removeAttr('required');
+    }
+});
+{% endcomment %}
+
 $('input[name="thumbnail"]').removeAttr('required max min maxlength pattern');
 </script>
 {% endblock %}

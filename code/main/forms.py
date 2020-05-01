@@ -1,6 +1,7 @@
 from django import forms
 
 from main.models import Content
+from main.utils import clean_content_url, ContentURLValidator
 
 
 class ContentForm(forms.ModelForm):
@@ -11,6 +12,16 @@ class ContentForm(forms.ModelForm):
             field.widget.attrs["placeholder"] = field.label
         self.fields["thumbnail"].widget = forms.widgets.FileInput()
         self.fields["thumbnail"].widget.attrs["style"] = "display: none;"
+
+    def clean_url(self):
+        # URLのクリーニング
+        content_type = self.cleaned_data.get("content_type")
+        url = self.cleaned_data.get("url")
+        url = clean_content_url(url, content_type)
+        # URLのバリデーション
+        content_url_validator = ContentURLValidator()
+        content_url_validator(url, content_type)
+        return url
 
 
 class ContentCreateForm(ContentForm):

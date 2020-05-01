@@ -60,6 +60,8 @@ def clean_content_url(url, content_type):
             url = url[:-1]
         return url
 
+    if not url:
+        return url
     # URLエンコーディング
     url = smart_urlquote(url)
     # 埋め込みタイプなら、不要な文字列を削除(WEBの場合は不要)
@@ -86,29 +88,40 @@ def get_origin_from(url):
 
 
 class ContentURLValidator(URLValidator):
-    message = "正しい形式のURLを入力してください。"
-    embed_type_message = "埋め込み元のURLが間違っています。"
     schemes = ['http', 'https']
 
     def __call__(self, value, content_type):
-        # URLValidator(親クラス)のvalidationを行う
-        super().__call__(value)
+        if value is None:
+            value = ""
         # content_typeごとにvalidationを行う
         self.validate_embed_type_url(value, content_type)
 
     def validate_embed_type_url(self, url, content_type):
         if content_type == SCRATCH:
             url_regex = r"https://scratch\.mit\.edu/projects/\d{9}/?"
+            message = "ScratchのプロジェクトURLを入力してください。"
+            example = "例: https://scratch.mit.edu/projects/111222333"
         elif content_type == UNITY:
             url_regex = r"https://unityroom\.com/games/.+"
+            message = "UnityroomのプロジェクトURLを入力してください。"
+            example = "例: https://unityroom.com/game/game_name"
         elif content_type == ARTWORK3D:
             url_regex = r"https://sketchfab\.com/3d-models/.+-[0-9a-f]{32}"
+            message = "SketchfabのプロジェクトURLを入力してください。"
+            example = "例: https://sketchfab.com/3d-models/project_name"
         else:
             url_regex = r".*"
+            message = "httpあるいはhttpsからはじまる有効なURLを入力してください。"
+            example = ""
+
+        self.message = message + example
+
+        # URLValidator(親クラス)のvalidationを行う
+        super().__call__(url)
 
         # 正規表現にマッチしなければ
         if not re.fullmatch(url_regex, url):
-            raise ValidationError(self.embed_type_message, code=self.code)
+            raise ValidationError(self.message, code=self.code)
 
 
 class EmbedHTML(object):

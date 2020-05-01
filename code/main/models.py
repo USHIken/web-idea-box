@@ -118,8 +118,9 @@ def validate_url_and_auto_fill_embed_html_pre_save(
         content_url_validator = utils.ContentURLValidator()
         content_url_validator(url, content_type)
         # safetyなURLから埋め込み用のHTMLを取得
-        get_embed_html = EmbedHTML(content_type, url)
-        instance.embed_html = get_embed_html()
+        if content_type in utils.EMBED_TYPES:
+            get_embed_html = EmbedHTML(content_type, url)
+            instance.embed_html = get_embed_html()
 
 
 @receiver(post_delete, sender=Content)
