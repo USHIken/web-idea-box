@@ -64,37 +64,6 @@ header #topImage {
     height: 25vh;
 }
 
-/* #index header figure {
-    height: 100%;
-}
-
-#index header div a {
-    display: block;
-    height: 100%;
-    width: 100%;
-}
-
-#index header div a img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-} */
-
-/* #index header figure {
-    height: auto;
-} */
-
-/* #index header figure {
-    height: auto;
-    width: auto;
-} */
-
-/* #index header figure img {
-    top: 0;
-    left: 0;
-    position: absolute;
-} */
-
 /* ================== main ================== */
 main {
     grid-column: 1 / -1;
@@ -327,8 +296,6 @@ footer {
     grid-template-columns: 1fr minmax(auto, 500px) 1fr;
     background-color: #ec6c2b;
     margin-top: auto;
-
-    /* bottom: 0; */
 }
 
 footer  div {
@@ -352,8 +319,7 @@ footer div i {
 /* ~~~~~~~~~~~~~~~~~~ #artwork ~~~~~~~~~~~~~~~~~~ */
 #artwork article {
     display: grid;
-    grid-template-columns: 1fr 10fr 1fr;
-    
+    grid-template-columns: 1fr 10fr 1fr; 
 }
 
 #artwork article > * {
@@ -382,8 +348,7 @@ footer div i {
 #artwork main article figure {
     grid-column: 2 / -2;
     height: 50vw;
-    width: 100%;
-    /* margin: 20px 0; */
+    width: 100%;s
 }
 
 #artwork main article > figure img {
@@ -626,16 +591,16 @@ footer div i {
     width: 80vw;
     height: 80vh;
     background-color: rgba(255, 255, 255, 0.99);
-
+    border-radius: 10px;
     z-index: 100;
 }
 
 #user .pop div {
-    display: grid;
+    justify-self: center;
     align-self: center;
-    grid-gap: 20px;
-    row-gap: 20px;
     height: 50%;
+    width: 80%;
+    text-align: center;
 }
 
 #user .userInfoOpen {
@@ -650,7 +615,7 @@ footer div i {
 }
 
 #user.userInfo .pop {
-    display: block;
+    display: grid;
 }
 
 #user .pop div button {
@@ -659,17 +624,41 @@ footer div i {
     left: auto;
     color: #000000;
     font-size: 20px;
-    height: 50px;
-    width: 80%;
     margin: auto;
+    margin-top: 50px;
     font-weight: bold;
     text-shadow: none;
-    border: solid 1px #000000;
+    border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: none;
     z-index: 100;
     position: relative;
+}
+
+#user .pop div p {
+    border-radius: 10px;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 20px;
+    background-color: #ec6c2b;
+}
+
+#user .pop div a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#user .pop div button img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    vertical-align: bottom;
 }
 
 /* ~~~~~~~~~~~~~~~~~~ #user ~~~~~~~~~~~~~~~~~~ */

@@ -44,8 +44,7 @@
     <div>
         <p><a href="{% url 'users:password_change' %}">パスワードを変更</a></p>
         <p><a href="{% url 'users:update' %}">プロフィールを変更</a></p>
-        <!-- <button type="button" onclick=''><i class="fas fa-times-circle"></i></button> -->
-        <button type="button" onclick=''><img src="{% static 'images/times-circle-solid.svg' %}" alt="" class="icon"></button>
+        <button type="button" onclick='userInfo()'><img src="{% static 'images/times-circle-solid.svg' %}" alt="" class="icon"></button>
     </div>
 </div>
 
