@@ -3,13 +3,13 @@ from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, FormView
 
 from main.models import Content
 from users.models import User
 from users.forms import (
     LoginForm, SignUpForm, ProfileUpdateForm,
-    UserPasswordChangeForm,
+    UserPasswordChangeForm, ContactForm
 )
 
 
@@ -95,3 +95,21 @@ class UserPasswordChangeView(PasswordChangeView):
     def get_success_url(self):
         user = self.request.user
         return reverse_lazy('users:profile', kwargs={'pk': user.pk})
+
+
+class ContactFormView(FormView):
+    template_name = "users/contact.html"
+    form_class = ContactForm
+
+    def form_valid(self, form, context):
+        form.send_email()
+        context["success"] = "お問い合わせが送信されました。"
+        return self.render_to_response(context)
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        context = self.get_context_data(**kwargs)
+        if form.is_valid():
+            return self.form_valid(form, context)
+        else:
+            return self.form_invalid(form)
