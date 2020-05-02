@@ -24,6 +24,12 @@ body {
     min-height: 100vh;
 }
 
+.icon {
+    width: 30px;
+    height: 30px;
+    fill: #ffffff;
+}
+
 /* ////////////////// Smartphone 基本設定 ////////////////// */
 /* ================== header ================== */
 header {
