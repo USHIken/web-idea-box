@@ -16,7 +16,7 @@ from users.forms import (
 class Login(LoginView):
     """ログインページ"""
     form_class = LoginForm
-    template_name = 'users/login_and_registration.html'
+    template_name = 'users/login.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -37,7 +37,7 @@ class Logout(LogoutView):
 class Signup(CreateView):
     """登録ページ"""
     form_class = SignUpForm
-    template_name = 'users/login_and_registration.html'
+    template_name = 'users/signup.html'
     success_url = reverse_lazy('main:index')
 
     def form_valid(self, form):

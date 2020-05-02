@@ -403,34 +403,34 @@ footer div i {
     background-color: #ec6c2b;
 }
 
-/* ~~~~~~~~~~~~~~~~~~ #login main ~~~~~~~~~~~~~~~~~~ */
-#login main {
+/* ~~~~~~~~~~~~~~~~~~ #auth main ~~~~~~~~~~~~~~~~~~ */
+#auth main {
     display: grid;
     grid-template-rows: calc(100vh - 100px);
     height: auto;
 }
 
-#login main form {
+#auth main form {
     justify-self: center;
     align-self: center;
 }
 
-#login main p {
+#auth main p {
     margin: 20px 0;
 }
 
-#login main input {
+#auth main input {
     border: solid 1px #000000;
     width: 70vw;
     padding: 10px 0;
     box-sizing: border-box;
 }
 
-#login input:last-of-type {
+#auth input:last-of-type {
     text-align: center;
 }
 
-#login input[type="submit"] {
+#auth input[type="submit"] {
     background-color: #ec6c2b;
     border: none;
     color: #ffffff;
@@ -840,8 +840,8 @@ footer div i {
         line-height: 28px;
     }
 
-    /* ~~~~~~~~~~~~~~~~~~ #login main ~~~~~~~~~~~~~~~~~~ */
-    #login main input {
+    /* ~~~~~~~~~~~~~~~~~~ #auth main ~~~~~~~~~~~~~~~~~~ */
+    #auth main input {
         margin: 20px 0;
         width: 40vw;
         padding: 10px;
@@ -967,8 +967,8 @@ footer div i {
         line-height: 30px;
     }
 
-    /* ~~~~~~~~~~~~~~~~~~ #login main ~~~~~~~~~~~~~~~~~~ */
-    #login main input {
+    /* ~~~~~~~~~~~~~~~~~~ #auth main ~~~~~~~~~~~~~~~~~~ */
+    #auth main input {
         margin: 20px 0;
         width: 30vw;
         padding: 10px;
