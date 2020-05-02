@@ -40,9 +40,9 @@
         </nav>
     </div>
     <button type="button" onclick='menuBar()'>
-        <img src="{% static 'images/bars-solid.svg' %}" alt="">
+        <img src="{% static 'images/bars-solid.svg' %}" alt="" class="icon">
     </button>
-    <a href="#"><img src="{% static 'images/arrow-alt-circle-up-solid.svg' %}" alt=""></a>
+    <a href="#"><img src="{% static 'images/arrow-alt-circle-up-solid.svg' %}" alt="" class="icon"></a>
     <span class="page-cover" onclick="menuBar()"></span>
 
     {% block footer %}
@@ -57,7 +57,6 @@
 
     {% block scripts %}
     <!-- ////////////////// javascript ////////////////// -->
-    <!-- <script src="https://kit.fontawesome.com/0ca1bb9859.js" crossorigin="anonymous"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
     <!-- Optional JavaScript -->
