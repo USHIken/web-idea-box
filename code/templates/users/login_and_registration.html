@@ -7,6 +7,7 @@
 <main>
     <form method="post">
         {% csrf_token %}
+        <p>{{ form.non_field_errors }}</p>
         <p>{{ form.username }}</p>
         <p>{{ form.username.errors }}</p>
         
@@ -24,14 +25,17 @@
         <p>{{ form.password2 }}</p>
         <p>{{ form.password2.errors }}</p>
 
+        <p>パスワードは次の4つに従って決定してください</p>
+        <ul>
+            <li>8文字以上</li>
+            <li>英字を含むこと</li>
+            <li>ユーザー名と似すぎないこと</li>
+            <li>一般的(soccer,appleなど)でないこと</li>
+        </ul>
+
         <p><input type="submit" value="とうろく"/></p>
 
         {% endif %}
     </form>
-    <!-- <div class="errorlist">
-    {% for key,error in form.errors.items %}
-        {{error}}
-    {% endfor %}
-    </div> -->
 </main>
 {% endblock %}

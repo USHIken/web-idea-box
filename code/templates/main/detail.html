@@ -31,7 +31,7 @@
         
             <form action="{% url 'main:delete' content.pk %}" method="post" onsubmit="return confirm_cancel('{{ content.title }}を削除しますか？')" name="form_delete">
                 {% csrf_token %}
-                <button type="submit"><a href="javascript:form_delete.submit()">削除する</a></button>
+                <button type="submit"><a>削除する</a></button>
             </form>
             {% endif %}
         </div>

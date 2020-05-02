@@ -1,5 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import (
+    AuthenticationForm, UserCreationForm, PasswordChangeForm,
+)
 
 from users.models import User
 
@@ -29,7 +31,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('icon', 'username', 'profile',)
+        fields = ('icon', 'username', 'profile', 'email')
 
     def __init__(self, *args, **kwargs):
         super(ProfileUpdateForm, self).__init__(*args, **kwargs)
@@ -37,3 +39,11 @@ class ProfileUpdateForm(forms.ModelForm):
             field.widget.attrs['placeholder'] = field.label
         self.fields["icon"].widget = forms.widgets.FileInput()
         self.fields["icon"].widget.attrs["style"] = "display: none;"
+
+
+class UserPasswordChangeForm(PasswordChangeForm):
+
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordChangeForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['placeholder'] = field.label
