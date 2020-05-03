@@ -1,0 +1,18 @@
+{% extends 'users/auth_form_base.html' %}
+{% load static %}
+
+{% block main %}
+<form method="post">
+    {% csrf_token %}
+    <p>{{ form.non_field_errors }}</p>
+    <p>{{ form.username }}</p>
+    <p>{{ form.username.errors }}</p>
+
+    <p>{{ form.password }}</p>
+    <p>{{ form.password.errors }}</p>
+    <p><input type="submit" value="ログイン"/></p>
+</form>
+
+<p><a href="{% url 'users:signup' %}">ユーザー登録はこちら</a></p>
+<p><a href="">パスワードのリセットはこちら</a></p>
+{% endblock %}

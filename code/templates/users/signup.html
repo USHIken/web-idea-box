@@ -1,0 +1,23 @@
+{% extends 'users/auth_form_base.html' %}
+{% load static %}
+
+{% block main %}
+<form method="post">
+    {% csrf_token %}
+    <p>{{ form.non_field_errors }}</p>
+    <p>{{ form.username }}</p>
+    <p>{{ form.username.errors }}</p>
+    
+    <p>{{ form.password1 }}</p>
+    <p>{{ form.password1.errors }}</p>
+    <p>{{ form.password2 }}</p>
+    <p>{{ form.password2.errors }}</p>
+
+    {% include 'users/password_rules.html' %}
+
+    <p><input type="submit" value="とうろく"/></p>
+
+</form>
+
+<p><a href="{% url 'users:login' %}">ログインはこちら</a></p>
+{% endblock %}

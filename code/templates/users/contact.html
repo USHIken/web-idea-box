@@ -2,16 +2,20 @@
 {% load static %}
 
 {% block main %}
+{% if success %}
+<p>{{ success }}</p>
+{% endif %}
+
 <form method="post">
     {% csrf_token %}
+    <p>{{ form.non_field_errors }}</p>
 
     {% for field in form %}
     <p>{{ field }}</p>
     <p>{{ field.errors }}</p>
     {% endfor %}
 
-    {% include 'users/password_rules.html' %}
+    <p><input type="submit" value="お問い合わせを送信"/></p>
 
-    <p><input type="submit" value="パスワードを変更"/></p>
 </form>
 {% endblock %}
