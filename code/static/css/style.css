@@ -413,6 +413,7 @@ footer div i {
 #login main form {
     justify-self: center;
     align-self: center;
+    text-align: center;
 }
 
 #login main p {
@@ -437,6 +438,11 @@ footer div i {
     font-weight: bold;
     font-size: 20px;
     -webkit-appearance: none;
+}
+
+#login nav ul {
+    text-align: left;
+    /* margin: 0 70px; */
 }
 
 /* ~~~~~~~~~~~~~~~~~~ #artworkcreat ~~~~~~~~~~~~~~~~~~ */
