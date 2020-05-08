@@ -14,4 +14,5 @@ urlpatterns = [
     path('update/<int:pk>', views.ContentUpdateView.as_view(), name='update'),
     path('delete/<int:pk>', views.ContentDeleteView.as_view(), name='delete'),
     path('mentor/', views.mentor, name='mentor'),
+    path('webtext/', views.webtext, name='webtext'),
 ]

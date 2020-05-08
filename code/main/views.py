@@ -131,3 +131,6 @@ class ContentDeleteView(LoginRequiredMixin, DeleteView):
 
 def mentor(request):
     return render(request, 'main/mentor.html')
+
+def webtext(request):
+    return render(request, 'main/webtext.html')

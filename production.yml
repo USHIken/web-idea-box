@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+
+  postgres:
+    image: postgres
+    env_file: .env/.production/.postgres.env
+
+  django:
+    build: .
+    env_file: .env/.production/.django.env
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./code:/code
+    ports:
+      - "8000:8000"
+      - "587:587"
+    depends_on:
+      - postgres
