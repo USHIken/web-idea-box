@@ -739,7 +739,18 @@ footer div i {
     font-size: 20px;
 }
 
+/* ~~~~~~~~~~~~~~~~~~ #user ~~~~~~~~~~~~~~~~~~ */
+#notfind {
+    height: 100%;
+}
 
+#notfind main {
+    min-height: calc(100vh - 100px);
+}
+
+#notfind main div {
+    min-height: calc(100vh - 100px);
+}
 
 /* ////////////////// Tablet 基本設定 ////////////////// */
 @media (min-width: 700px) and (max-width:1199px) {
