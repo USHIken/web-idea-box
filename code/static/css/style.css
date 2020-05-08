@@ -442,7 +442,15 @@ footer div i {
 
 #login nav ul {
     text-align: left;
-    /* margin: 0 70px; */
+}
+
+#auth main > p {
+    font-size: 20px;
+    text-align: center;
+}
+
+#auth main > p a {
+    color: #000000;
 }
 
 /* ~~~~~~~~~~~~~~~~~~ #artworkcreat ~~~~~~~~~~~~~~~~~~ */
@@ -841,6 +849,7 @@ footer div i {
     main h3 {
         margin-left: 0;
         font-size: 25px;
+        height: 3em;
     }
 
     main article > figure img {
@@ -953,13 +962,12 @@ footer div i {
     }
 
     main h3 {
+        display: flex;
         margin-left: 0;
         font-size: 22px;
+        height: 3em;
+        align-items: end;
     }
-
-    /* main article > figure {
-        height: 12.5vw;
-    } */
 
     main article > figure img {
         height: 12.5vw;
