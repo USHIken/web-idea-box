@@ -7,3 +7,4 @@ ipython
 PIllow
 beautifulsoup4
 requests
+gunicorn
