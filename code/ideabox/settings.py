@@ -25,7 +25,7 @@ SECRET_KEY = 'zihqtf%+8i0%%1hsdkp7(gq#rf0(usk_@w5a1oev-nf!e(h6ai'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "160.16.50.55", "creatit.jp"]
+ALLOWED_HOSTS = ["localhost", "160.16.50.55", "creatit.jp", "www.creatit.jp"]
 
 
 # Application definition
