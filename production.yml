@@ -17,3 +17,8 @@ services:
       - "587:587"
     depends_on:
       - postgres
+
+networks:
+  default:
+    external:
+      name: shared
